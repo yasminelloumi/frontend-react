@@ -15,8 +15,8 @@ const App = () => {
     <div>
       <Header />
       
-      <Body />
-<Footer />
+    
+        
       <Router>
 
         <Routes>
@@ -26,6 +26,8 @@ const App = () => {
 
         </Routes>
       </Router>
+
+      <Footer />
     </div>
   );
 };
