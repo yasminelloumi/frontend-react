@@ -63,7 +63,7 @@ const Body = () => {
               </Card.Text>
               <Button
                 variant="success"
-                onClick={() => handleNavigation("/medecin")}
+                onClick={() => handleNavigation("/MedecinListe")}
               >
                 Accéder
               </Button>
@@ -87,7 +87,7 @@ const Body = () => {
               </Card.Text>
               <Button
                 variant="info"
-                onClick={() => handleNavigation("/medicament")}
+                onClick={() => handleNavigation("/ListeMedicament")}
               >
                 Accéder
               </Button>
@@ -111,7 +111,7 @@ const Body = () => {
               </Card.Text>
               <Button
                 variant="warning"
-                onClick={() => handleNavigation("/ordonnance")}
+                onClick={() => handleNavigation("/ListeOrdonnance")}
               >
                 Accéder
               </Button>

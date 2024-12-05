@@ -8,6 +8,9 @@ import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Body from "./components/Body/Body";
 import ListePatient from "./components/PatientList/ListePatient";
+import MedecinListe from "./components/Medecin/MedecinListe";
+import ListeMedicament from "./components/Medicament/ListeMedicament";
+import ListeOrdonnance from "./components/Ordonnance/ListeOrdonnance";
 // Correct import
 
 const App = () => {
@@ -18,6 +21,11 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Body />} />
           <Route path="/ListePatient" element={<ListePatient />} />{" "}
+          <Route path="/MedecinListe" element={<MedecinListe />} />{" "}
+          <Route path="/ListeMedicament" element={<ListeMedicament />} />{" "}
+          <Route path="/ListeOrdonnance" element={<ListeOrdonnance />} />{" "}
+
+          
           {/* Fixed reference */}
         </Routes>
       </Router>
