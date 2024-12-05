@@ -1,18 +1,20 @@
 import React from "react";
 import logo from "../../assets/logo.png";
 import "./Header.css";
+import { Link } from "react-router-dom";
 
 function Header() {
   return (
     <div className="header">
       <img src={logo} alt="Logo" className="logo" />
       <ul className="header-menu">
-        <a href="#">Menu</a>
-        <a href="#">Profile</a>
+        <Link to="/">Menu</Link>
+        <Link to="/Profile">Profile</Link>
       </ul>
-      {/* Add the user icon here */}
       <div className="header-right">
-        <i className="fa-solid fa-user"></i>
+        <Link to="/Login">
+          <i className="fa-solid fa-user"></i>
+        </Link>
       </div>
     </div>
   );

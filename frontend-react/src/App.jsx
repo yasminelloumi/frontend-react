@@ -1,3 +1,4 @@
+import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import "@fortawesome/fontawesome-free/css/all.css";
@@ -11,26 +12,24 @@ import ListePatient from "./components/PatientList/ListePatient";
 import MedecinListe from "./components/Medecin/MedecinListe";
 import ListeMedicament from "./components/Medicament/ListeMedicament";
 import ListeOrdonnance from "./components/Ordonnance/ListeOrdonnance";
-// Correct import
+import Login from "./components/Login/Login";
 
 const App = () => {
   return (
-    <div>
-      <Header />
-      <Router>
+    <Router>
+      <div>
+        <Header />
         <Routes>
           <Route path="/" element={<Body />} />
-          <Route path="/ListePatient" element={<ListePatient />} />{" "}
-          <Route path="/MedecinListe" element={<MedecinListe />} />{" "}
-          <Route path="/ListeMedicament" element={<ListeMedicament />} />{" "}
-          <Route path="/ListeOrdonnance" element={<ListeOrdonnance />} />{" "}
-
-          
-          {/* Fixed reference */}
+          <Route path="/ListePatient" element={<ListePatient />} />
+          <Route path="/MedecinListe" element={<MedecinListe />} />
+          <Route path="/ListeMedicament" element={<ListeMedicament />} />
+          <Route path="/ListeOrdonnance" element={<ListeOrdonnance />} />
+          <Route path="/Login" element={<Login />} />
         </Routes>
-      </Router>
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </Router>
   );
 };
 
