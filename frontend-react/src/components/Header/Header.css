@@ -15,8 +15,11 @@
   
   /* Logo styling */
   .logo {
-    height: 50px; /* Adjust logo height */
+    width: 150px;
+    height: auto;
+    display: block;
   }
+  
   
   /* Navbar menu */
   .header-menu {
@@ -36,7 +39,7 @@
   }
   
   .header-menu a:hover {
-    color: #007bff; /* Change to blue on hover */
+    color:  #2c844e; /* Change to blue on hover */
   }
   
   /* Right-side icon styling */
@@ -48,7 +51,7 @@
   }
   
   .header-right:hover {
-    color: #007bff; /* Blue color on hover */
+    color: #2c844e; /* Blue color on hover */
   }
   
   /* Add some margin to the body to prevent content overlap with the fixed navbar */
