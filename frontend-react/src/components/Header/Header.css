@@ -1,0 +1,58 @@
+/* General header styling */
+.header {
+    position: fixed; /* Makes the navbar stick to the top */
+    top: 0; /* Ensures it's at the very top of the page */
+    left: 0;
+    width: 100%; /* Makes the navbar span the full width of the page */
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Space between logo, menu, and icon */
+    padding: 10px 20px;
+    background-color: #f8f9fa; /* Light gray background */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for navbar */
+    z-index: 1000; /* Keeps the navbar above other content */
+  }
+  
+  /* Logo styling */
+  .logo {
+    height: 50px; /* Adjust logo height */
+  }
+  
+  /* Navbar menu */
+  .header-menu {
+    display: flex;
+    gap: 20px; /* Space between menu items */
+    list-style: none; /* Remove default list styling */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+  }
+  
+  .header-menu a {
+    text-decoration: none; /* Remove underline from links */
+    color: #333; /* Dark text color */
+    font-size: 16px; /* Adjust font size */
+    font-weight: 500; /* Slightly bold */
+    transition: color 0.3s; /* Smooth hover effect */
+  }
+  
+  .header-menu a:hover {
+    color: #007bff; /* Change to blue on hover */
+  }
+  
+  /* Right-side icon styling */
+  .header-right {
+    font-size: 20px; /* Adjust icon size */
+    color: #333; /* Icon color */
+    cursor: pointer; /* Change cursor to pointer for interactivity */
+    transition: color 0.3s; /* Smooth hover effect */
+  }
+  
+  .header-right:hover {
+    color: #007bff; /* Blue color on hover */
+  }
+  
+  /* Add some margin to the body to prevent content overlap with the fixed navbar */
+  body {
+    margin-top: 70px; /* Adjust this based on the height of the navbar */
+  }
+  
