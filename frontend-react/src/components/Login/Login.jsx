@@ -4,8 +4,8 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import background from "../../assets/background.jpg";
 import logo from "../../assets/Logoo.png";
 import { Link } from "react-router-dom";
-import { CSSTransition } from "react-transition-group"; // Importing the CSSTransition component
-
+import { CSSTransition } from "react-transition-group"; 
+import "./Login.css"
 const LoginSection = () => {
   const [showForm, setShowForm] = useState(false); // Manage the form visibility for the animation
 
@@ -27,27 +27,27 @@ const LoginSection = () => {
             background-position: center;
             background-attachment: fixed;
           }
-
+          
           .slide-enter {
             transform: translateY(-100%);
             opacity: 0;
+            transition: transform 0.5s ease-out, opacity 0.5s ease-out;
           }
 
           .slide-enter-active {
             transform: translateY(0);
             opacity: 1;
-            transition: transform 0.5s ease-out, opacity 0.5s ease-out;
           }
 
           .slide-exit {
             transform: translateY(0);
             opacity: 1;
+            transition: transform 0.5s ease-in, opacity 0.5s ease-in;
           }
 
           .slide-exit-active {
             transform: translateY(-100%);
             opacity: 0;
-            transition: transform 0.5s ease-in, opacity 0.5s ease-in;
           }
         `}
       </style>

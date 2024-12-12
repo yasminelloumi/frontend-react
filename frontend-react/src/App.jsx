@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
-import "./App.css";
+/*import "./App.css";*/
 import "@fortawesome/fontawesome-free/css/all.css";
 import "bootstrap/dist/css/bootstrap.min.css";
  
@@ -16,6 +16,7 @@ import ListeMedicament from "./components/Medicament/ListeMedicament";
 import ListeOrdonnance from "./components/Ordonnance/ListeOrdonnance";
 import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
+import BackgroundImage from "./components/bodyImageBackground/backgroundImage";
 
 const AppContent = () => {
   const location = useLocation();
@@ -27,9 +28,11 @@ const AppContent = () => {
     <div>
       {/* Conditionally render Header */}
       {!shouldHideHeaderFooter && <Header />}
+      {!shouldHideHeaderFooter && <BackgroundImage />}
 
       <main>
         <Routes>
+        <Route path="/" element={<Body />} />
           <Route path="/" element={<Body />} />
           <Route path="/ListePatient" element={<ListePatient />} />
           <Route path="/MedecinListe" element={<MedecinListe />} />
@@ -42,6 +45,7 @@ const AppContent = () => {
 
       {/* Conditionally render Footer */}
       {!shouldHideHeaderFooter && <Footer />}
+      
     </div>
   );
 };
@@ -50,6 +54,7 @@ const App = () => {
   return (
     <Router>
       <AppContent />
+      
     </Router>
   );
 };

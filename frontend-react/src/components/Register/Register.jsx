@@ -4,6 +4,8 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import background from "../../assets/background.jpg";
 import logo from "../../assets/Logoo.png";
 import { Link } from "react-router-dom";
+import "./Register.css";
+
 
 const RegisterSection = () => {
   const [role, setRole] = useState("patient");
@@ -290,3 +292,5 @@ const RegisterSection = () => {
 };
 
 export default RegisterSection;
+
+
