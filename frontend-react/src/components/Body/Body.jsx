@@ -4,28 +4,16 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom"; // Import useNavigate for navigation
 
-
 const Body = () => {
   const navigate = useNavigate(); // Initialize navigate function
 
   const handleNavigation = (path) => {
     navigate(path); // Use navigate to go to the given path
   };
-  
 
   return (
     <>
-     
-
       {/* Header Section */}
-      <div className="w-100 text-center py-5">
-        <h1 className="mb-4 text-dark">
-          Welcome To Our Plateform!
-        </h1>
-        <p className="mb-4 text-dark">
-           Choose a section to continue:
-        </p>
-      </div>
 
       {/* Section des cartes */}
       <div className="w-100 d-flex justify-content-center py-5">
@@ -82,7 +70,6 @@ const Body = () => {
           {/* Carte Médicament */}
           <div className="col">
             <Card className="h-100 shadow-sm">
-              
               <Card.Img
                 variant="top"
                 src="https://static.vecteezy.com/ti/vecteur-libre/p1/11854465-modele-de-pharmacie-magasin-d-illustration-plat-dessin-anime-dessine-a-la-main-pour-la-vente-de-medicaments-un-pharmacien-des-medicaments-des-capsules-et-une-bouteille-vectoriel.jpg"

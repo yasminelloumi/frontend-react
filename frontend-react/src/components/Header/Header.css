@@ -1,61 +1,62 @@
-/* General header styling */
+/* Header Styles */
 .header {
-    position: fixed; /* Makes the navbar stick to the top */
-    top: 0; /* Ensures it's at the very top of the page */
-    left: 0;
-    width: 100%; /* Makes the navbar span the full width of the page */
-    display: flex;
-    align-items: center;
-    justify-content: space-between; /* Space between logo, menu, and icon */
-    padding: 10px 20px;
-    background-color: #f8f9fa; /* Light gray background */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for navbar */
-    z-index: 1000; /* Keeps the navbar above other content */
-  }
-  
-  /* Logo styling */
-  .logo {
-    width: 100px;
-    height: auto;
-    display: block;
-  }
-  
-  
-  /* Navbar menu */
-  .header-menu {
-    display: flex;
-    gap: 20px; /* Space between menu items */
-    list-style: none; /* Remove default list styling */
-    margin: 0; /* Remove default margin */
-    padding: 0; /* Remove default padding */
-  }
-  
-  .header-menu a {
-    text-decoration: none; /* Remove underline from links */
-    color: #333; /* Dark text color */
-    font-size: 16px; /* Adjust font size */
-    font-weight: 500; /* Slightly bold */
-    transition: color 0.3s; /* Smooth hover effect */
-  }
-  
-  .header-menu a:hover {
-    color:  #2c844e; /* Change to blue on hover */
-  }
-  
-  /* Right-side icon styling */
-  .header-right {
-    font-size: 20px; /* Adjust icon size */
-    color: #333; /* Icon color */
-    cursor: pointer; /* Change cursor to pointer for interactivity */
-    transition: color 0.3s; /* Smooth hover effect */
-  }
-  
-  .header-right:hover {
-    color: #2c844e; /* Blue color on hover */
-  }
-  
-  /* Add some margin to the body to prevent content overlap with the fixed navbar */
-  body {
-    margin-top: 70px; /* Adjust this based on the height of the navbar */
+  /* padding: 10px 0; /* Reduced padding to minimize space at the top and bottom */
+   margin: 0; /* Remove any extra margins */
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+ }
+ 
+ .header .logo {
+   max-width: 120px; /* Reduced maximum width for smaller logo */
+   max-height: 120px; /* Reduced maximum height */
+   height: auto; /* Maintain aspect ratio */
+ }
+ 
+ /* Menu Styles */
+ .header-menu {
+   display: flex;
+   list-style: none;
+   gap: 20px;
+   color: #008080;
+   font-size: 18px;
+   text-decoration: none; /* Remove underline */
+   margin: 0; /* Remove default list margin */
+   padding: 0; /* Remove default list padding */
+ }
+ 
+ .header-menu a {
+   color: #008B8B;
+   text-decoration: none;
+   font-size: 18px;
+   transition: color 0.3s ease;
+ }
+ 
+ .header-menu a:hover {
+   color: #40E0D0; /* Highlight on hover */
+ }
+ 
+ .header-menu .active {
+   padding-bottom: 2px;
+   border-bottom: 2px solid #008B8B;
+ }
+ 
+ /* Right Section (Icons, Login Button) */
+ .header-right {
+   display: flex;
+   align-items: center;
+   gap: 40px;
+ }
+ 
+ .header-right a {
+   color: #48D1CC;
+   font-size: 20px;
+   text-decoration: none;
+   transition: color 0.3s ease;
+ }
+ 
+ .header-right a:hover {
+   color: #40E0D0;
+ 
   }
   
