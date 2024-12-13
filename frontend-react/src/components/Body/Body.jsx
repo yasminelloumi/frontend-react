@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom"; // Import useNavigate for navigation
+import './Body.css';
 
 const Body = () => {
   const navigate = useNavigate(); // Initialize navigate function
@@ -20,7 +21,7 @@ const Body = () => {
         <div className="row w-100 row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
           {/* Carte Patient */}
           <div className="col">
-            <Card className="h-100 shadow-sm">
+            <Card className="h-100 shadow-box">
               <Card.Img
                 variant="top"
                 src="https://media.istockphoto.com/id/1217755212/fr/vectoriel/pharmacien.jpg?s=612x612&w=0&k=20&c=H-DOLy92x4QmyXnmTz88rXIksVmjpCdO3bLSmfaA3w4="
@@ -45,7 +46,7 @@ const Body = () => {
 
           {/* Carte Médecin */}
           <div className="col">
-            <Card className="h-100 shadow-sm">
+            <Card className="h-100 shadow-box">
               <Card.Img
                 variant="top"
                 src="https://static.vecteezy.com/ti/vecteur-libre/p1/7686631-personnel-medical-de-medecins-et-infirmiers-groupe-de-medecins-vecteur-plat-cartoon-illustraiton-gratuit-vectoriel.jpg"
@@ -69,7 +70,7 @@ const Body = () => {
 
           {/* Carte Médicament */}
           <div className="col">
-            <Card className="h-100 shadow-sm">
+            <Card className="h-100 shadow-box">
               <Card.Img
                 variant="top"
                 src="https://static.vecteezy.com/ti/vecteur-libre/p1/11854465-modele-de-pharmacie-magasin-d-illustration-plat-dessin-anime-dessine-a-la-main-pour-la-vente-de-medicaments-un-pharmacien-des-medicaments-des-capsules-et-une-bouteille-vectoriel.jpg"
@@ -93,7 +94,7 @@ const Body = () => {
 
           {/* Carte Ordonnance */}
           <div className="col">
-            <Card className="h-100 shadow-sm">
+            <Card className="h-100 shadow-box">
               <Card.Img
                 variant="top"
                 src="https://us.123rf.com/450wm/dilendom/dilendom2003/dilendom200300007/141590755-image-vectorielle-isom%C3%A9trique-sur-fond-bleu-le-m%C3%A9decin-remplit-un-formulaire-de-prescription.jpg?ver=6"
@@ -117,11 +118,8 @@ const Body = () => {
         </div>
       </div>
 
-      {/* Footer (if any) */}
-      <div className="footer py-4 bg-dark text-white text-center">
-        {/* Add footer content here */}
-        <p>© 2024 E-Santé Platform</p>
-      </div>
+      
+      
     </>
   );
 };

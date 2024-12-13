@@ -1,11 +1,12 @@
 import React from 'react';
 import logo from "../../assets/logo.png";
-import 'bootstrap/dist/css/bootstrap.min.css';
+//import 'bootstrap/dist/css/bootstrap.min.css';
+import './Footer.css';
 
 const Footer = () => {
     return (
-        <footer className="bg-dark text-light py-5" id="footer">
-            <div className="container">
+        <footer  className= "cont">
+           
                 <div className="row">
 
                     {/* Section gauche : Logo et description */}
@@ -44,15 +45,15 @@ const Footer = () => {
                 </div>
 
                 {/* Ligne de séparation */}
-                <hr className="border-light" />
+                <hr />
 
                 {/* Mentions légales */}
-                <div className="text-center">
+                <div >
                     <p className="mb-0">
                         &copy; 2024 E-Santé. Tous droits réservés. | <a href="#privacy" className="text-light text-decoration-none">Politique de confidentialité</a>
                     </p>
                 </div>
-            </div>
+           
         </footer>
     );
 };

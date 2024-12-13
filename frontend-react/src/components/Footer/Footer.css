@@ -1,0 +1,24 @@
+.cont{
+    background-color: #292e37; /* Light background color */
+    color: #495057; /* Dark gray text color for better contrast */
+    width: 100%; /* Full width */
+    padding: 20px 0; /* Add padding for top and bottom */
+    box-sizing: border-box; /* Include padding and borders in the width */
+    margin: 0 0 0 0;
+
+
+} 
+
+
+
+footer a {
+    color: #007bff; /* Lighter blue color for links */
+}
+
+footer a:hover {
+    color: #0056b3; /* Darker blue color on hover */
+}
+
+footer hr {
+    border-color: #ced4da; /* Lighter separator line */
+}
