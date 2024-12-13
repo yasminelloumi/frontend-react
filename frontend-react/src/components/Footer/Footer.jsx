@@ -1,11 +1,11 @@
 import logo from "../../assets/logo.png";
-import 'bootstrap/dist/css/bootstrap.min.css';
+//import 'bootstrap/dist/css/bootstrap.min.css';
 import './Footer.css'; // Importez le fichier CSS
 
 const Footer = () => {
     return (
-        <footer className="footer bg-dark text-light py-5" id="footer">
-            <div className="container-fluid">
+        <footer className="cont" >
+            
                 <div className="row">
 
                     {/* Section gauche : Logo et description */}
@@ -57,9 +57,7 @@ const Footer = () => {
                         &copy; 2024 E-Santé. Tous droits réservés. | <a href="#privacy" className="text-light text-decoration-none">Politique de confidentialité</a>
                     </p>
                 </div>
-            </div>
+            
         </footer>
     );
-};
-
-export default Footer;
+};export default Footer;
