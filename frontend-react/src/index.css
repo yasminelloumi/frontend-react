@@ -25,9 +25,10 @@ a:hover {
 body {
   margin: 0;
   display: flex;
-  place-items: center;
-  min-width: 320px;
+  flex-direction: column; /* Pour permettre au footer d'être sous le contenu */
   min-height: 100vh;
+  background-color: var(--background-color);
+  color: var(--color);
 }
 
 h1 {
@@ -54,6 +55,50 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+/* -------- Footer Styles -------- */
+#footer {
+  width: 100%;
+  background-color: #1a1a1a;
+  color: rgba(255, 255, 255, 0.87);
+  padding: 2em 0;
+  text-align: center;
+  position: relative; /* Si vous voulez que le footer ne soit pas fixé */
+}
+
+#footer .container-fluid {
+  padding: 0 2em;
+}
+
+#footer h5 {
+  font-size: 1.2em;
+  font-weight: 500;
+  margin-bottom: 1em;
+}
+
+#footer ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#footer ul li {
+  margin-bottom: 0.5em;
+}
+
+#footer ul li a {
+  color: rgba(255, 255, 255, 0.87);
+  text-decoration: none;
+}
+#footer ul li a:hover {
+  color: #646cff;
+  text-decoration: underline;
+}
+
+#footer .border-light {
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Adaptation en mode clair */
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
@@ -64,5 +109,22 @@ button:focus-visible {
   }
   button {
     background-color: #f9f9f9;
+  }
+
+  #footer {
+    background-color: #f9f9f9;
+    color: #213547;
+  }
+
+  #footer ul li a {
+    color: #213547;
+  }
+
+  #footer ul li a:hover {
+    color: #747bff;
+  }
+
+  #footer .border-light {
+    border-color: rgba(0, 0, 0, 0.1) !important;
   }
 }

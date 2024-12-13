@@ -58,4 +58,7 @@
   body {
     margin-top: 70px; /* Adjust this based on the height of the navbar */
   }
+  html {
+    scroll-behavior: smooth;
+  }
   

@@ -1,9 +1,10 @@
-import { useState } from 'react';
-import { Table, Container } from "react-bootstrap";
+import { useState } from "react";
+import { Table, Container, Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import "./Body.css";
 
-function ListeOrdonnance() {
-  // Hardcoded list of prescriptions (Ordonnances)
-  const [ordonnances] = useState([
+function GestionOrdonnances() {
+  const [ordonnances, setOrdonnances] = useState([
     {
       IDOrdonnance: 1,
       Date: "2024-12-01",
@@ -22,20 +23,27 @@ function ListeOrdonnance() {
       MedecinName: "Dr. Johnson",
       Medicaments: ["Ibuprofen"],
     },
-    {
-      IDOrdonnance: 3,
-      Date: "2024-10-15",
-      IDPatient: 3,
-      PatientName: "Alice Brown",
-      IDMedecin: 3,
-      MedecinName: "Dr. White",
-      Medicaments: ["Paracetamol"],
-    },
   ]);
+
+  const navigate = useNavigate();
+
+  // Supprimer une ordonnance
+  const handleDelete = (id) => {
+    const updatedOrdonnances = ordonnances.filter(
+      (ordonnance) => ordonnance.IDOrdonnance !== id
+    );
+    setOrdonnances(updatedOrdonnances);
+  };
+
+  // Rediriger vers le formulaire d'ajout
+  const handleAdd = () => navigate("/AjouterOrdonnance");
 
   return (
     <Container className="mt-5">
-      <h2 className="mb-4">Liste des Ordonnances</h2>
+      <h2 className="mb-4">Gestion des Ordonnances</h2>
+      <Button variant="primary" className="mb-3" onClick={handleAdd}>
+        Ajouter une Ordonnance
+      </Button>
       <Table striped bordered hover responsive>
         <thead>
           <tr>
@@ -44,6 +52,7 @@ function ListeOrdonnance() {
             <th>Patient</th>
             <th>Médecin</th>
             <th>Médicaments</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -54,6 +63,15 @@ function ListeOrdonnance() {
               <td>{ordonnance.PatientName}</td>
               <td>{ordonnance.MedecinName}</td>
               <td>{ordonnance.Medicaments.join(", ")}</td>
+              <td>
+                <Button
+                  variant="danger"
+                  size="sm"
+                  onClick={() => handleDelete(ordonnance.IDOrdonnance)}
+                >
+                  Supprimer
+                </Button>
+              </td>
             </tr>
           ))}
         </tbody>
@@ -62,4 +80,4 @@ function ListeOrdonnance() {
   );
 }
 
-export default ListeOrdonnance;
+export default GestionOrdonnances;

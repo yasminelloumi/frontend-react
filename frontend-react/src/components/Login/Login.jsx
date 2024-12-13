@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const Login = () => {
@@ -39,7 +39,7 @@ const Login = () => {
               <form onSubmit={handleSubmit}>
                 <div className="mb-3">
                   <label htmlFor="username" className="form-label">
-                    Nom d'utilisateur
+                    Nom d utilisateur
                   </label>
                   <input
                     type="text"

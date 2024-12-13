@@ -2,6 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom"; // Import useNavigate for navigation
+import "./Body.css";
 
 const Body = () => {
   const navigate = useNavigate(); // Initialize navigate function
@@ -13,11 +14,9 @@ const Body = () => {
   return (
     <div className="container vh-100 d-flex flex-column justify-content-center align-items-center bg-light">
       <h1 className="mb-4 text-center">
-        Bienvenue sur notre plateforme E-Santé
+        Bienvenue dans l&apos; Espace Administrateur de la Plateforme E-Santé
       </h1>
-      <p className="mb-4 text-center">
-        Choisissez une section pour continuer :
-      </p>
+      <p className="mb-4 text-center">Choisissez une section pour gérer les données :</p>
 
       {/* Section des cartes */}
       <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
@@ -38,7 +37,7 @@ const Body = () => {
               </Card.Text>
               <Button
                 variant="primary"
-                onClick={() => handleNavigation("/ListePatient")}
+                onClick={() => handleNavigation("/GestionPatients")}
               >
                 Accéder
               </Button>
@@ -46,23 +45,24 @@ const Body = () => {
           </Card>
         </div>
 
-        {/* Carte Médecin */}
+        {/* Carte Personnel */}
         <div className="col">
           <Card className="h-100 shadow-sm">
             <Card.Img
               variant="top"
               src="https://static.vecteezy.com/ti/vecteur-libre/p1/7686631-personnel-medical-de-medecins-et-infirmiers-groupe-de-medecins-vecteur-plat-cartoon-illustraiton-gratuit-vectoriel.jpg"
-              alt="Médecin"
+              alt="Personnel"
               style={{ width: "100%", height: "200px", objectFit: "cover" }}
             />
             <Card.Body>
-              <Card.Title>Médecin</Card.Title>
+              <Card.Title>Personnel</Card.Title>
               <Card.Text>
-                Connectez-vous pour consulter vos patients et leurs dossiers.
+                Gérez les informations du personnel, y compris les médecins,
+                les administrateurs, et autres membres.
               </Card.Text>
               <Button
                 variant="success"
-                onClick={() => handleNavigation("/MedecinListe")}
+                onClick={() => handleNavigation("/GestionPersonnel")}
               >
                 Accéder
               </Button>
@@ -86,7 +86,7 @@ const Body = () => {
               </Card.Text>
               <Button
                 variant="info"
-                onClick={() => handleNavigation("/ListeMedicament")}
+                onClick={() => handleNavigation("/GestionMedicaments")}
               >
                 Accéder
               </Button>
@@ -110,7 +110,7 @@ const Body = () => {
               </Card.Text>
               <Button
                 variant="warning"
-                onClick={() => handleNavigation("/ListeOrdonnance")}
+                onClick={() => handleNavigation("/GestionOrdonnances")}
               >
                 Accéder
               </Button>
