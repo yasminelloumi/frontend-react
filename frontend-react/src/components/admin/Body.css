@@ -1,0 +1,25 @@
+/* Applique le style turquoise à tous les boutons */
+button,
+.btn {
+  background-color: #40e0d0; /* Couleur turquoise */
+  color: white;
+  border: 2px solid #40e0d0; /* Bordure turquoise */
+}
+
+button:hover,
+.btn:hover {
+  background-color: white;
+  color: #40e0d0;
+  border: 2px solid #40e0d0;
+}
+
+/* Applique des bordures turquoise aux tables */
+.table,
+.table-bordered {
+  border: 2px solid #40e0d0;
+}
+
+.table-bordered th,
+.table-bordered td {
+  border: 2px solid #40e0d0;
+}

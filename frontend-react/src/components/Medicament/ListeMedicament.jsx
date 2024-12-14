@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from 'react';
 import { Table, Container } from "react-bootstrap";
 
 function ListeMedicament() {
@@ -41,7 +41,7 @@ function ListeMedicament() {
             <th>Description</th>
             <th>Prix</th>
             <th>Quantité en Stock</th>
-            <th>Date d'Expiration</th>
+            <th>Date d Expiration</th>
           </tr>
         </thead>
         <tbody>
