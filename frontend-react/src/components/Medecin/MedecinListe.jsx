@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Table, Container } from "react-bootstrap";
 
 function MedecinListe() {
