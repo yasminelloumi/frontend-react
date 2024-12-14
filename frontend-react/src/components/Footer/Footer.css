@@ -1,24 +1,46 @@
-.cont{
-    background-color: #292e37; /* Light background color */
-    color: #495057; /* Dark gray text color for better contrast */
-    width: 100%; /* Full width */
-    padding: 20px 0; /* Add padding for top and bottom */
-    box-sizing: border-box; /* Include padding and borders in the width */
-    margin: 0 0 0 0;
+.cont {
+    background-color: #FEFEFC;
+    color: #0c0909; /* White text for contrast */
+    width: 100%; /* Full width of the viewport */
+    padding: 20px 20px;
+    box-sizing: border-box; /* Include padding in width calculation */
+    margin: 0; /* Remove all margins */
 
-
-} 
-
-
-
-footer a {
-    color: #007bff; /* Lighter blue color for links */
+   
 }
 
-footer a:hover {
-    color: #0056b3; /* Darker blue color on hover */
+footer .row {
+    display: flex;
+    justify-content: space-between; /* Evenly distribute sections */
+    flex-wrap: wrap; /* Allow sections to stack on smaller screens */
+    width: 100%; /* Cover full width */
+    margin: 0 auto; /* Center content */
+    padding: 0; /* Remove any padding */
+}
+
+footer .col-md-4 {
+    flex: 1; /* Make columns flexible */
+    min-width: 250px; /* Prevent columns from becoming too narrow */
+    text-align: center; /* Center-align content */
+    margin-bottom: 20px; /* Add spacing between sections */
 }
 
 footer hr {
-    border-color: #ced4da; /* Lighter separator line */
+    border-color: #ced4da;
+    width: 100%; /* Full-width separator */
+    margin: 20px 0; /* Add spacing above and below */
+}
+
+footer p {
+    text-align: center; /* Center the copyright text */
+    margin: 0;
+}
+
+footer a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: #0056b3;
 }
