@@ -18,7 +18,7 @@ import GestionPersonnel from "./components/administrateur/Gestionpersonnel";
 import GestionPatients from "./components/administrateur/GestionPatients";
 import AjouterOrdonnance from "./components/administrateur/GestionOrdonnances";
 import MedicamentManagement from "./components/administrateur/GestionMedicaments";
-
+import MedicationProvider from "./components/Fournisseur/MedicationProvider"
 const AppContent = () => {
   const location = useLocation();
 
@@ -44,6 +44,7 @@ const AppContent = () => {
           <Route path="/GestionPatients" element={<GestionPatients />} />
           <Route path="/AjouterOrdonnance" element={<AjouterOrdonnance />} />
           <Route path="/MedicamentManagement" element={<MedicamentManagement />} />
+          <Route path="/MedicationProvider" element={<MedicationProvider />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/Register" element={<Register />} />
         </Routes>
