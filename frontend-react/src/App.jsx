@@ -22,6 +22,8 @@ import GestionPatients from "./components/administrateur/GestionPatients";
 import AjouterOrdonnance from "./components/administrateur/GestionOrdonnances";
 import MedicamentManagement from "./components/administrateur/GestionMedicaments";
 import MedicationProvider from "./components/Fournisseur/MedicationProvider";
+import { FaHome } from "react-icons/fa";
+import Home from "./components/Pages/Home";
 
 const AppContent = () => {
   const location = useLocation();
@@ -36,7 +38,7 @@ const AppContent = () => {
 
       <main>
         <Routes>
-          <Route path="/" element={<ListePatient />} /> {/* Page d'accueil */}
+          <Route path="/" element={<Home />} /> {/* Page d'accueil */}
           <Route path="/ListePatient" element={<ListePatient />} />
           <Route path="/MedecinListe" element={<MedecinListe />} />
           <Route path="/ListeMedicament" element={<ListeMedicament />} />
