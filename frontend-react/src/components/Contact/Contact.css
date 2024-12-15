@@ -1,11 +1,11 @@
 .contactForm {
-    max-width: 800px; /* Increased max-width to make the form larger */
-    margin: 150px auto 200px auto; /* Keep the margin for positioning */
-    padding: 3rem; /* Increased padding for more spacing inside the form */
-    background-color: #f8f9fa; /* Fallback color for the background */
-    background-size: cover; /* Ensures the image covers the form */
-    background-position: center; /* Centers the background image */
-    background-repeat: no-repeat; /* Ensures the image doesn't repeat */
+    max-width: 800px; 
+    margin: 150px auto 200px auto; 
+    padding: 3rem; 
+    background-color: #f8f9fa; 
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     animation: fadeIn 0.5s ease-in-out;
@@ -26,12 +26,12 @@
   .contactForm textarea {
     border-radius: 5px;
     border: 1px solid #ced4da;
-    padding: 14px; /* Increased padding for better spacing inside inputs */
+    padding: 14px; 
     width: 100%;
     margin-bottom: 15px;
     font-size: 16px;
     transition: border-color 0.3s ease;
-    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background to make text fields visible */
+    background-color: rgba(255, 255, 255, 0.8); 
   }
   
   /* Focused input and textarea */
@@ -45,7 +45,7 @@
   .submit-btn {
     background-color: #44a58b;
     color: #fff;
-    padding: 14px 30px; /* Increased padding for the button */
+    padding: 14px 30px; 
     font-size: 16px;
     border: none;
     border-radius: 5px;
@@ -122,4 +122,16 @@
     z-index: -1; 
     overflow: auto; 
   }
+  .contact-title {
+    font-size: 2rem; 
+    font-weight: bold; 
+    color: #278099; 
+    margin-bottom: 20px; 
+    text-transform: uppercase; 
+    text-align: center; 
+  }
   
+
+  .contact-title {
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2); 
+  }

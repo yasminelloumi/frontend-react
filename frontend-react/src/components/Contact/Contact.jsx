@@ -76,6 +76,7 @@ const ContactForm = () => {
           <div className="row">
             <div className="col-12 text-center">
               <div className="contactForm">
+              <h2 className="contact-title">Contact Us</h2>
                 <form
                   id="contact-form"
                   onSubmit={handleSubmit(onSubmit)}
