@@ -33,7 +33,7 @@ const AppContent = () => {
 
       <main>
         <Routes>
-          <Route path="/" element={<Home/>} /> {/* Use Home Component */}
+          <Route path="/" element={<Home />} /> {/* Use Home Component */}
           <Route path="/ListePatient" element={<ListePatient />} />
           <Route path="/MedecinListe" element={<MedecinListe />} />
           <Route path="/ListeMedicament" element={<ListeMedicament />} />
