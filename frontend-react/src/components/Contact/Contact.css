@@ -1,0 +1,125 @@
+.contactForm {
+    max-width: 800px; /* Increased max-width to make the form larger */
+    margin: 150px auto 200px auto; /* Keep the margin for positioning */
+    padding: 3rem; /* Increased padding for more spacing inside the form */
+    background-color: #f8f9fa; /* Fallback color for the background */
+    background-size: cover; /* Ensures the image covers the form */
+    background-position: center; /* Centers the background image */
+    background-repeat: no-repeat; /* Ensures the image doesn't repeat */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  /* Fade-in animation for form */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  /* Form inputs and textarea */
+  .contactForm input,
+  .contactForm textarea {
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    padding: 14px; /* Increased padding for better spacing inside inputs */
+    width: 100%;
+    margin-bottom: 15px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background to make text fields visible */
+  }
+  
+  /* Focused input and textarea */
+  .contactForm input:focus,
+  .contactForm textarea:focus {
+    border-color: #6c757d;
+    outline: none;
+  }
+  
+  /* Submit button styles */
+  .submit-btn {
+    background-color: #44a58b;
+    color: #fff;
+    padding: 14px 30px; /* Increased padding for the button */
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Disabled button styles */
+  .submit-btn:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+  }
+  
+  /* Button hover effect */
+  .submit-btn:hover {
+    background-color: #44a58b;
+  }
+  
+  /* Button focus effect */
+  .submit-btn:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.6);
+  }
+  
+  /* Error message styles */
+  .errorMessage {
+    color: #dc3545;
+    font-size: 14px;
+  }
+  
+  /* Success alert */
+  .alert-success {
+    background-color: #28a745;
+    color: white;
+    font-size: 16px;
+    padding: 15px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  /* Danger alert */
+  .alert-danger {
+    background-color: #dc3545;
+    color: white;
+    font-size: 16px;
+    padding: 15px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  /* Close button for alerts */
+  .alert .btn-close {
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .background-container {
+    position: absolute;
+    top: 150px; 
+    left: 300px;
+    right: 300px;
+    bottom: 50px; 
+    background-image: url('src/assets/contabackground.jpg'); 
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    z-index: -1; 
+    overflow: auto; 
+  }
+  

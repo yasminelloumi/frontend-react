@@ -1,13 +1,12 @@
 import Header from "../Header/Header";
-import BackgroundImage from "../bodyImageBackground/backgroundImage";
-import Body from "../Body/Body";
+import OverlapStructure from "../OverlapStructure/OverlapStructure";
 
 const Home = () => {
   return (
     <div>
       
-      <BackgroundImage />
-      <Body />
+      
+      <OverlapStructure/>
     </div>
   );
 };
