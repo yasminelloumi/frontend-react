@@ -23,7 +23,7 @@ import AjouterOrdonnance from "./components/administrateur/GestionOrdonnances";
 import MedicamentManagement from "./components/administrateur/GestionMedicaments";
 import MedicationProvider from "./components/Fournisseur/MedicationProvider";
 import { FaHome } from "react-icons/fa";
-import Home from "./components/Pages/Home";
+//import Home from "./components/Pages/Home";
 import ContactForm from "./components/Contact/Contact"; 
 
 
