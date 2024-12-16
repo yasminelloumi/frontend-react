@@ -15,10 +15,11 @@ const Body = () => {
     <>
       {/* Header Section */}
 
-      {/* Section des cartes */}
-      <div className="w-100 d-flex justify-content-center py-5">
+      {/* Card Section */}
+      <div className="w-100 d-flex justify-content-center" style={{ paddingTop: '0', paddingBottom: '3rem' }}>
+
         <div className="row w-100 row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
-          {/* Carte Patient */}
+          {/* Patient Card */}
           <div className="col">
             <Card className="h-100 shadow-box">
               <Card.Img
@@ -30,95 +31,91 @@ const Body = () => {
               <Card.Body>
                 <Card.Title>Patient</Card.Title>
                 <Card.Text>
-                  Accédez à votre espace personnel et gérez vos informations
-                  médicales.
+                  Access your personal space and manage your medical information.
                 </Card.Text>
                 <Button
                   variant="primary"
                   onClick={() => handleNavigation("/ListePatient")}
                 >
-                  Accéder
+                  Access
                 </Button>
               </Card.Body>
             </Card>
           </div>
 
-          {/* Carte Médecin */}
+          {/* Doctor Card */}
           <div className="col">
             <Card className="h-100 shadow-box">
               <Card.Img
                 variant="top"
                 src="https://static.vecteezy.com/ti/vecteur-libre/p1/7686631-personnel-medical-de-medecins-et-infirmiers-groupe-de-medecins-vecteur-plat-cartoon-illustraiton-gratuit-vectoriel.jpg"
-                alt="Médecin"
+                alt="Doctor"
                 style={{ width: "100%", height: "200px", objectFit: "cover" }}
               />
               <Card.Body>
-                <Card.Title>Médecin</Card.Title>
+                <Card.Title>Doctor</Card.Title>
                 <Card.Text>
-                  Connectez-vous pour consulter vos patients et leurs dossiers.
+                  Log in to consult your patients and their records.
                 </Card.Text>
                 <Button
                   variant="success"
                   onClick={() => handleNavigation("/MedecinListe")}
                 >
-                  Accéder
+                  Access
                 </Button>
               </Card.Body>
             </Card>
           </div>
 
-          {/* Carte Médicament */}
+          {/* Medication Card */}
           <div className="col">
             <Card className="h-100 shadow-box">
               <Card.Img
                 variant="top"
                 src="https://static.vecteezy.com/ti/vecteur-libre/p1/11854465-modele-de-pharmacie-magasin-d-illustration-plat-dessin-anime-dessine-a-la-main-pour-la-vente-de-medicaments-un-pharmacien-des-medicaments-des-capsules-et-une-bouteille-vectoriel.jpg"
-                alt="Médicament"
+                alt="Medication"
                 style={{ width: "100%", height: "200px", objectFit: "cover" }}
               />
               <Card.Body>
-                <Card.Title>Médicament</Card.Title>
+                <Card.Title>Medication</Card.Title>
                 <Card.Text>
-                  Recherchez des informations détaillées sur les médicaments.
+                  Search for detailed information about medications.
                 </Card.Text>
                 <Button
                   variant="info"
                   onClick={() => handleNavigation("/ListeMedicament")}
                 >
-                  Accéder
+                  Access
                 </Button>
               </Card.Body>
             </Card>
           </div>
 
-          {/* Carte Ordonnance */}
+          {/* Prescription Card */}
           <div className="col">
             <Card className="h-100 shadow-box">
               <Card.Img
                 variant="top"
                 src="https://us.123rf.com/450wm/dilendom/dilendom2003/dilendom200300007/141590755-image-vectorielle-isom%C3%A9trique-sur-fond-bleu-le-m%C3%A9decin-remplit-un-formulaire-de-prescription.jpg?ver=6"
-                alt="Ordonnance"
+                alt="Prescription"
                 style={{ width: "100%", height: "200px", objectFit: "cover" }}
               />
               <Card.Body>
-                <Card.Title>Ordonnance</Card.Title>
+                <Card.Title>Prescription</Card.Title>
                 <Card.Text>
-                  Générez et consultez vos ordonnances électroniques.
+                  Generate and view your electronic prescriptions.
                 </Card.Text>
                 <Button
                   variant="warning"
                   onClick={() => handleNavigation("/ListeOrdonnance")}
                 >
-                  Accéder
+                  Access
                 </Button>
               </Card.Body>
             </Card>
           </div>
         </div>
       </div>
-
-      
-      
     </>
   );
 };

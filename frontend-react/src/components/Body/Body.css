@@ -4,21 +4,17 @@
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, background 0.3s ease-in-out;
 }
 
-/* Define the hover effect */
+/* Hover effect for cards */
 .shadow-box:hover {
     transform: scale(1.05); /* Slight zoom effect */
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3), 0 12px 24px rgba(0, 0, 0, 0.2);
     cursor: crosshair; /* Change cursor to crosshair */
-}
-
-/* Add colorful hover effect with gradient animation */
-.shadow-box:hover {
     background: linear-gradient(45deg, #3B7366, #D6F7F0, #8FC9C9, #6BCFB8);
     background-size: 400% 400%;
     animation: gradientShift 4s ease infinite;
 }
 
-/* Define the animation for the background gradient */
+/* Gradient background animation */
 @keyframes gradientShift {
     0% {
         background-position: 0% 50%;
@@ -31,68 +27,51 @@
     }
 }
 
-/* Style the "Accéder" buttons with circular borders and shadow */
+/* Style the "Accéder" buttons */
 button {
-    border-radius: 30px; /* Make the button more circular */
+    border-radius: 30px; /* Circular border */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
-    padding: 30px 50px; /* Increase padding to make the button bigger */
-    font-size: 18px; /* Adjust font size for better readability */
+    padding: 15px 30px; /* Balanced padding */
+    font-size: 16px; /* Readable font size */
+    color: #fff; /* White text for contrast */
+    border: none; /* Remove default border */
 }
 
-/* Add shadow and increase size on hover */
+/* Button hover effects */
 button:hover {
-    transform: scale(1.05); /* Slight zoom effect */
+    transform: scale(1.05); /* Slight zoom */
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3), 0 12px 24px rgba(0, 0, 0, 0.2);
     border-radius: 40px;
-    padding: 15px 39px;
-    border-color: #17a2b8;
-    background-color: #007bff; /* Change the background color on hover (blue) */
-    cursor: crosshair; /* Change cursor to crosshair */
+    background-color: #007bff; /* Default hover background color */
+    border-color: #17a2b8; /* Subtle border color */
+    cursor: crosshair; /* Crosshair cursor */
 }
 
-/* Optionally, you can define specific color changes for each button type on hover */
-button.btn-primary:hover {
-    background-color: #17a2b8; /* Darker blue for primary button */
-}
-
-button.btn-success:hover {
-    background-color: #17a2b8; /* Darker green for success button */
-}
-
-button.btn-info:hover {
-    background-color: #17a2b8; /* Darker blue for info button */
-}
-
+/* Specific hover colors for button types */
+button.btn-primary:hover,
+button.btn-success:hover,
+button.btn-info:hover,
 button.btn-warning:hover {
-    background-color: #17a2b8; /* Darker yellow for warning button */
+    background-color: #17a2b8; /* Uniform hover color */
 }
 
-/* Define the colors for each button */
-button.btn-primary {
-    background-color: #17a2b8;
-    border-color: #17a2b8;
-    border-radius: 40px;
-    padding: 15px 39px;
-}
-
-button.btn-success {
-    background-color: #17a2b8;
-    border-color: #17a2b8;
-    border-radius: 40px;
-    padding: 15px 39px;
-}
-
-button.btn-info {
-    background-color: #17a2b8;
-    border-color: #17a2b8;
-    border-radius: 40px;
-    padding: 15px 39px;
-}
-
+/* Define button colors */
+button.btn-primary,
+button.btn-success,
+button.btn-info,
 button.btn-warning {
     background-color: #17a2b8;
-    border-color: #17a2b8;
     border-radius: 40px;
-    padding: 15px 39px;
+    padding: 15px 39px; /* Unified padding */
+    color: #fff; /* Text color */
+    border: none;
+}
+
+/* Add smooth transitions for button states */
+button.btn-primary,
+button.btn-success,
+button.btn-info,
+button.btn-warning {
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }

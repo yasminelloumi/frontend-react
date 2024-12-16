@@ -83,7 +83,7 @@ function PatientManagement() {
         Add Patient
       </Button>
       <Table striped bordered hover responsive>
-        <thead>
+        <thead> 
           <tr>
             <th>ID</th>
             <th>Name</th>
