@@ -31,7 +31,10 @@ function AddPrescription() {
 
   return (
     <div className="d-flex justify-content-center align-items-center vh-100">
-      <Container className="p-4 shadow rounded form-container" style={{ maxWidth: "600px" }}>
+      <Container
+        className="p-4 shadow rounded form-container"
+        style={{ maxWidth: "600px" }}
+      >
         <h2 className="mb-4 text-center">New Prescription</h2>
         <Form onSubmit={handleSubmit}>
           <Row className="mb-3">
@@ -40,7 +43,9 @@ function AddPrescription() {
               <Form.Control
                 type="date"
                 value={formData.Date}
-                onChange={(e) => setFormData({ ...formData, Date: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, Date: e.target.value })
+                }
                 required
               />
             </Col>
@@ -52,7 +57,9 @@ function AddPrescription() {
               <Form.Control
                 type="text"
                 value={formData.PatientName}
-                onChange={(e) => setFormData({ ...formData, PatientName: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, PatientName: e.target.value })
+                }
                 required
               />
             </Col>
@@ -64,7 +71,9 @@ function AddPrescription() {
               <Form.Control
                 type="text"
                 value={formData.DoctorName}
-                onChange={(e) => setFormData({ ...formData, DoctorName: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, DoctorName: e.target.value })
+                }
                 required
               />
             </Col>
@@ -97,7 +106,11 @@ function AddPrescription() {
           </Row>
 
           <div className="text-center">
-            <Button variant="success" type="submit" className="me-3 btn-turquoise">
+            <Button
+              variant="success"
+              type="submit"
+              className="me-3 btn-turquoise"
+            >
               Add
             </Button>
             <Button

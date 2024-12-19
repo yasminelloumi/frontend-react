@@ -5,9 +5,30 @@ import AlerteMedicaments from "./AlerteMedicaments";
 
 const MedicamentManagement = () => {
   const [medicaments, setMedicaments] = useState([
-    { Id: 1, Name: "Paracetamol", Description: "Painkiller and antipyretic", Price: 5.50, StockQuantity: 100, ExpiryDate: "2025-12-31" },
-    { Id: 2, Name: "Ibuprofen", Description: "Anti-inflammatory and analgesic", Price: 8.00, StockQuantity: 50, ExpiryDate: "2024-09-15" },
-    { Id: 3, Name: "Amoxicillin", Description: "Antibiotic for infections", Price: 12.00, StockQuantity: 5, ExpiryDate: "2026-03-10" }, // Low stock for testing
+    {
+      Id: 1,
+      Name: "Paracetamol",
+      Description: "Painkiller and antipyretic",
+      Price: 5.5,
+      StockQuantity: 100,
+      ExpiryDate: "2025-12-31",
+    },
+    {
+      Id: 2,
+      Name: "Ibuprofen",
+      Description: "Anti-inflammatory and analgesic",
+      Price: 8.0,
+      StockQuantity: 50,
+      ExpiryDate: "2024-09-15",
+    },
+    {
+      Id: 3,
+      Name: "Amoxicillin",
+      Description: "Antibiotic for infections",
+      Price: 12.0,
+      StockQuantity: 5,
+      ExpiryDate: "2026-03-10",
+    }, // Low stock for testing
   ]);
 
   const [showModal, setShowModal] = useState(false);
@@ -27,13 +48,15 @@ const MedicamentManagement = () => {
   const [showAlerte, setShowAlerte] = useState(false);
 
   // Filtre pour les médicaments avec StockQuantity <= 10
-  const lowStockMedications = medicaments.filter((med) => med.StockQuantity <= 10);
+  const lowStockMedications = medicaments.filter(
+    (med) => med.StockQuantity <= 10
+  );
   const stockFaible = lowStockMedications.length > 0; // Show alert if there are any low stock medications
 
   // Effect to automatically show the alert if any stock quantity is 10 or less
   useEffect(() => {
     if (stockFaible) {
-      setShowAlerte(true);  // Show alert when stock is low
+      setShowAlerte(true); // Show alert when stock is low
     } else {
       setShowAlerte(false); // Hide alert if no low stock
     }
@@ -96,25 +119,30 @@ const MedicamentManagement = () => {
   };
 
   const handleOrderMedicament = () => {
-    alert(`Ordering ${orderQuantity} of ${medicamentToEdit.Name} from supplier.`);
+    alert(
+      `Ordering ${orderQuantity} of ${medicamentToEdit.Name} from supplier.`
+    );
     setShowOrderModal(false);
     setOrderQuantity(1);
   };
 
   return (
     <div className="medicament-management">
-      <h2>Medicament Management <i
-        className="fa-solid fa-bell"
-        style={{ color: stockFaible ? "red" : "black", cursor: "pointer" }}
-        onClick={() => setShowAlerte(!showAlerte)} 
-      ></i></h2>
+      <h2>
+        Medicament Management{" "}
+        <i
+          className="fa-solid fa-bell"
+          style={{ color: stockFaible ? "red" : "black", cursor: "pointer" }}
+          onClick={() => setShowAlerte(!showAlerte)}
+        ></i>
+      </h2>
 
       {showAlerte && (
         <AlerteMedicaments
           lowStockMedications={lowStockMedications}
           onUpdateQuantity={handleEditMedicament}
           onDelete={handleDeleteMedicament}
-          onClose={() => setShowAlerte(false)} 
+          onClose={() => setShowAlerte(false)}
         />
       )}
 
@@ -140,13 +168,27 @@ const MedicamentManagement = () => {
               <td>{medicament.StockQuantity}</td>
               <td>{new Date(medicament.ExpiryDate).toLocaleDateString()}</td>
               <td>
-                <Button variant="link" size="sm" className="me-2" onClick={() => handleEditModalShow(medicament)}>
+                <Button
+                  variant="link"
+                  size="sm"
+                  className="me-2"
+                  onClick={() => handleEditModalShow(medicament)}
+                >
                   <MdEdit />
                 </Button>
-                <Button variant="link" size="sm" onClick={() => handleDeleteMedicament(medicament.Id)}>
+                <Button
+                  variant="link"
+                  size="sm"
+                  onClick={() => handleDeleteMedicament(medicament.Id)}
+                >
                   <MdDelete />
                 </Button>
-                <Button variant="link" size="sm" className="me-2" onClick={() => handleOrderModalShow(medicament)}>
+                <Button
+                  variant="link"
+                  size="sm"
+                  className="me-2"
+                  onClick={() => handleOrderModalShow(medicament)}
+                >
                   <MdShoppingCart />
                 </Button>
               </td>
@@ -155,7 +197,9 @@ const MedicamentManagement = () => {
         </tbody>
       </Table>
 
-      <Button variant="success" onClick={handleModalShow}>Add Medicament</Button>
+      <Button variant="success" onClick={handleModalShow}>
+        Add Medicament
+      </Button>
 
       {/* Modal for adding a new medicament */}
       <Modal show={showModal} onHide={handleModalClose}>
@@ -166,29 +210,65 @@ const MedicamentManagement = () => {
           <Form>
             <Form.Group className="mb-3" controlId="formMedicamentName">
               <Form.Label>Name</Form.Label>
-              <Form.Control type="text" placeholder="Medicament Name" name="Name" value={newMedicament.Name} onChange={handleInputChange} />
+              <Form.Control
+                type="text"
+                placeholder="Medicament Name"
+                name="Name"
+                value={newMedicament.Name}
+                onChange={handleInputChange}
+              />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formMedicamentDescription">
               <Form.Label>Description</Form.Label>
-              <Form.Control type="text" placeholder="Medicament Description" name="Description" value={newMedicament.Description} onChange={handleInputChange} />
+              <Form.Control
+                type="text"
+                placeholder="Medicament Description"
+                name="Description"
+                value={newMedicament.Description}
+                onChange={handleInputChange}
+              />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formMedicamentPrice">
               <Form.Label>Price</Form.Label>
-              <Form.Control type="number" placeholder="Medicament Price" name="Price" value={newMedicament.Price} onChange={handleInputChange} />
+              <Form.Control
+                type="number"
+                placeholder="Medicament Price"
+                name="Price"
+                value={newMedicament.Price}
+                onChange={handleInputChange}
+              />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formMedicamentStockQuantity">
+            <Form.Group
+              className="mb-3"
+              controlId="formMedicamentStockQuantity"
+            >
               <Form.Label>Stock Quantity</Form.Label>
-              <Form.Control type="number" placeholder="Stock Quantity" name="StockQuantity" value={newMedicament.StockQuantity} onChange={handleInputChange} />
+              <Form.Control
+                type="number"
+                placeholder="Stock Quantity"
+                name="StockQuantity"
+                value={newMedicament.StockQuantity}
+                onChange={handleInputChange}
+              />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formMedicamentExpiryDate">
               <Form.Label>Expiration Date</Form.Label>
-              <Form.Control type="date" name="ExpiryDate" value={newMedicament.ExpiryDate} onChange={handleInputChange} />
+              <Form.Control
+                type="date"
+                name="ExpiryDate"
+                value={newMedicament.ExpiryDate}
+                onChange={handleInputChange}
+              />
             </Form.Group>
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleModalClose}>Close</Button>
-          <Button variant="primary" onClick={handleAddMedicament}>Add</Button>
+          <Button variant="secondary" onClick={handleModalClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleAddMedicament}>
+            Add
+          </Button>
         </Modal.Footer>
       </Modal>
 
@@ -201,29 +281,65 @@ const MedicamentManagement = () => {
           <Form>
             <Form.Group className="mb-3" controlId="formMedicamentName">
               <Form.Label>Name</Form.Label>
-              <Form.Control type="text" placeholder="Medicament Name" name="Name" value={medicamentToEdit?.Name} onChange={handleEditInputChange} />
+              <Form.Control
+                type="text"
+                placeholder="Medicament Name"
+                name="Name"
+                value={medicamentToEdit?.Name}
+                onChange={handleEditInputChange}
+              />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formMedicamentDescription">
               <Form.Label>Description</Form.Label>
-              <Form.Control type="text" placeholder="Medicament Description" name="Description" value={medicamentToEdit?.Description} onChange={handleEditInputChange} />
+              <Form.Control
+                type="text"
+                placeholder="Medicament Description"
+                name="Description"
+                value={medicamentToEdit?.Description}
+                onChange={handleEditInputChange}
+              />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formMedicamentPrice">
               <Form.Label>Price</Form.Label>
-              <Form.Control type="number" placeholder="Medicament Price" name="Price" value={medicamentToEdit?.Price} onChange={handleEditInputChange} />
+              <Form.Control
+                type="number"
+                placeholder="Medicament Price"
+                name="Price"
+                value={medicamentToEdit?.Price}
+                onChange={handleEditInputChange}
+              />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formMedicamentStockQuantity">
+            <Form.Group
+              className="mb-3"
+              controlId="formMedicamentStockQuantity"
+            >
               <Form.Label>Stock Quantity</Form.Label>
-              <Form.Control type="number" placeholder="Stock Quantity" name="StockQuantity" value={medicamentToEdit?.StockQuantity} onChange={handleEditInputChange} />
+              <Form.Control
+                type="number"
+                placeholder="Stock Quantity"
+                name="StockQuantity"
+                value={medicamentToEdit?.StockQuantity}
+                onChange={handleEditInputChange}
+              />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formMedicamentExpiryDate">
               <Form.Label>Expiration Date</Form.Label>
-              <Form.Control type="date" name="ExpiryDate" value={medicamentToEdit?.ExpiryDate} onChange={handleEditInputChange} />
+              <Form.Control
+                type="date"
+                name="ExpiryDate"
+                value={medicamentToEdit?.ExpiryDate}
+                onChange={handleEditInputChange}
+              />
             </Form.Group>
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleEditModalClose}>Close</Button>
-          <Button variant="primary" onClick={handleEditMedicament}>Save</Button>
+          <Button variant="secondary" onClick={handleEditModalClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleEditMedicament}>
+            Save
+          </Button>
         </Modal.Footer>
       </Modal>
 
@@ -235,12 +351,20 @@ const MedicamentManagement = () => {
         <Modal.Body>
           <Form.Group className="mb-3" controlId="formOrderQuantity">
             <Form.Label>Order Quantity</Form.Label>
-            <Form.Control type="number" value={orderQuantity} onChange={handleOrderQuantityChange} />
+            <Form.Control
+              type="number"
+              value={orderQuantity}
+              onChange={handleOrderQuantityChange}
+            />
           </Form.Group>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleOrderModalClose}>Close</Button>
-          <Button variant="primary" onClick={handleOrderMedicament}>Order</Button>
+          <Button variant="secondary" onClick={handleOrderModalClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleOrderMedicament}>
+            Order
+          </Button>
         </Modal.Footer>
       </Modal>
     </div>

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Container, Form, Button, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import axios from 'axios';
+import axios from "axios";
 
 function EnvoyerOrdonnance() {
   const navigate = useNavigate();
@@ -27,21 +27,24 @@ function EnvoyerOrdonnance() {
     const prescriptionData = {
       patientId: formData.patientId,
       medecinName: formData.medecinName,
-      medicaments: formData.medicaments.map(med => ({
+      medicaments: formData.medicaments.map((med) => ({
         medicamentId: med.medicamentId,
-        quantite: med.quantite
-      }))
+        quantite: med.quantite,
+      })),
     };
 
     try {
       // Send data to the backend API via POST
-      const response = await axios.post('/api/Ordonnance', prescriptionData);
-      console.log('Prescription created successfully:', response.data);
+      const response = await axios.post("/api/Ordonnance", prescriptionData);
+      console.log("Prescription created successfully:", response.data);
 
       // Redirect after successful submission
       navigate("/");
     } catch (error) {
-      console.error("Error while creating prescription:", error.response?.data || error.message);
+      console.error(
+        "Error while creating prescription:",
+        error.response?.data || error.message
+      );
     }
   };
 
@@ -63,7 +66,10 @@ function EnvoyerOrdonnance() {
 
   return (
     <div className="d-flex justify-content-center align-items-center vh-100">
-      <Container className="p-4 shadow rounded form-container" style={{ maxWidth: "600px" }}>
+      <Container
+        className="p-4 shadow rounded form-container"
+        style={{ maxWidth: "600px" }}
+      >
         <h2 className="mb-4 text-center">New Prescription</h2>
         <Form onSubmit={handleSubmit}>
           <Row className="mb-3">
@@ -72,7 +78,12 @@ function EnvoyerOrdonnance() {
               <Form.Control
                 type="number"
                 value={formData.patientId}
-                onChange={(e) => setFormData({ ...formData, patientId: parseInt(e.target.value, 10) })}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    patientId: parseInt(e.target.value, 10),
+                  })
+                }
                 required
               />
             </Col>
@@ -84,7 +95,9 @@ function EnvoyerOrdonnance() {
               <Form.Control
                 type="text"
                 value={formData.medecinName}
-                onChange={(e) => setFormData({ ...formData, medecinName: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, medecinName: e.target.value })
+                }
                 required
               />
             </Col>
@@ -119,13 +132,21 @@ function EnvoyerOrdonnance() {
           ))}
 
           <div className="text-center mb-3">
-            <Button variant="primary" onClick={addMedication} className="btn-turquoise">
+            <Button
+              variant="primary"
+              onClick={addMedication}
+              className="btn-turquoise"
+            >
               Add Medication
             </Button>
           </div>
 
           <div className="text-center">
-            <Button variant="success" type="submit" className="me-3 btn-turquoise">
+            <Button
+              variant="success"
+              type="submit"
+              className="me-3 btn-turquoise"
+            >
               Add
             </Button>
             <Button

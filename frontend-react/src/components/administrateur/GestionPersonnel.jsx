@@ -37,7 +37,6 @@ function PersonnelManagement() {
                 onClick={() => handleNavigation("/GestionMedecin")}
               >
                 Access
-
               </Button>
             </Card.Body>
           </Card>
@@ -72,15 +71,13 @@ function PersonnelManagement() {
           <Card className="h-100 shadow-box" style={{ width: "18rem" }}>
             <Card.Img
               variant="top"
-              src="/src/assets/Users.jpg"  // Placeholder image
+              src="/src/assets/Users.jpg" // Placeholder image
               alt="All Users"
               style={{ height: "200px", objectFit: "cover" }}
             />
             <Card.Body>
               <Card.Title>All Users</Card.Title>
-              <Card.Text>
-                Manage access for all users in the system.
-              </Card.Text>
+              <Card.Text>Manage access for all users in the system.</Card.Text>
               <Button
                 variant="warning"
                 onClick={() => handleNavigation("/GestionUsers")}

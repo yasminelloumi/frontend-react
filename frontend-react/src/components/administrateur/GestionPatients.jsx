@@ -1,5 +1,12 @@
 import { useState, useEffect } from "react";
-import { Table, Modal, Form, Button, InputGroup, FormControl } from "react-bootstrap";
+import {
+  Table,
+  Modal,
+  Form,
+  Button,
+  InputGroup,
+  FormControl,
+} from "react-bootstrap";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import axios from "axios";
 
@@ -41,7 +48,10 @@ function PatientManagement() {
   const handleSavePatient = async () => {
     try {
       if (editMode) {
-        await axios.put(`http://localhost:5026/api/Patient/${currentPatient.id}`, currentPatient);
+        await axios.put(
+          `http://localhost:5026/api/Patient/${currentPatient.id}`,
+          currentPatient
+        );
       } else {
         await axios.post("http://localhost:5026/api/Patient", currentPatient);
       }
@@ -67,9 +77,11 @@ function PatientManagement() {
       alert("Please enter a valid search term.");
       return;
     }
-  
+
     try {
-      const response = await axios.get(`http://localhost:5026/api/Patient/search?searchTerm=${searchTerm}`);
+      const response = await axios.get(
+        `http://localhost:5026/api/Patient/search?searchTerm=${searchTerm}`
+      );
       setPatients(response.data); // Update patients with search results
     } catch (error) {
       console.error("Error searching patients:", error);
@@ -78,7 +90,6 @@ function PatientManagement() {
       }
     }
   };
-  
 
   return (
     <>
@@ -116,10 +127,13 @@ function PatientManagement() {
               <td>{new Date(patient.dateOfBirth).toLocaleDateString()}</td>
               <td>
                 <FaEdit
-                  style={{ cursor: "pointer", color: "turquoise", marginRight: 10 }}
+                  style={{
+                    cursor: "pointer",
+                    color: "turquoise",
+                    marginRight: 10,
+                  }}
                   onClick={() => handleShowModal(patient)}
                 />
-                
               </td>
             </tr>
           ))}

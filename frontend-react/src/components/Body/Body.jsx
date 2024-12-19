@@ -2,7 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom"; // Import useNavigate for navigation
-import './Body.css';
+import "./Body.css";
 
 const Body = () => {
   const navigate = useNavigate(); // Initialize navigate function
@@ -16,8 +16,10 @@ const Body = () => {
       {/* Header Section */}
 
       {/* Card Section */}
-      <div className="w-100 d-flex justify-content-center" style={{ paddingTop: '0', paddingBottom: '3rem' }}>
-
+      <div
+        className="w-100 d-flex justify-content-center"
+        style={{ paddingTop: "0", paddingBottom: "3rem" }}
+      >
         <div className="row w-100 row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
           {/* Patient Card */}
           <div className="col">
@@ -31,7 +33,8 @@ const Body = () => {
               <Card.Body>
                 <Card.Title>Patient</Card.Title>
                 <Card.Text>
-                  Access your personal space and manage your medical information.
+                  Access your personal space and manage your medical
+                  information.
                 </Card.Text>
                 <Button
                   variant="primary"

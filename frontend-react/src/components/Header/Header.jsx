@@ -45,8 +45,8 @@ function Header() {
           </Link>
         </li>
         <li>
-        <Link to="/contact">CONTACT</Link>
-                </li>
+          <Link to="/contact">CONTACT</Link>
+        </li>
       </ul>
 
       {/* User Login Icon */}

@@ -50,7 +50,6 @@ function ListeMedicament() {
               <th>Description</th>
               <th>Prix</th>
               <th>Quantité en Stock</th>
-              
             </tr>
           </thead>
           <tbody>
@@ -61,7 +60,6 @@ function ListeMedicament() {
                 <td>{medicament.description}</td>
                 <td>{medicament.prix.toFixed(2)} €</td>
                 <td>{medicament.qttStock}</td>
-                
               </tr>
             ))}
           </tbody>
