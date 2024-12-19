@@ -1,4 +1,3 @@
-import Header from "../Header/Header";
 import OverlapStructure from "../OverlapStructure/OverlapStructure";
 
 const Home = () => {

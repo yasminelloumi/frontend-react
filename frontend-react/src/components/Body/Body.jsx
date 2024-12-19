@@ -31,7 +31,7 @@ const Body = () => {
               <Card.Body>
                 <Card.Title>Patient</Card.Title>
                 <Card.Text>
-                  Access your personal space and manage your medical information.
+                 Log in to consult your patients and their records.
                 </Card.Text>
                 <Button
                   variant="primary"
@@ -55,7 +55,7 @@ const Body = () => {
               <Card.Body>
                 <Card.Title>Doctor</Card.Title>
                 <Card.Text>
-                  Log in to consult your patients and their records.
+                Access your personal space and manage your medical information.
                 </Card.Text>
                 <Button
                   variant="success"

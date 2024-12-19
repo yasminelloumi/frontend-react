@@ -1,9 +1,8 @@
-import Button from "react-bootstrap/Button";
-import "./ProfileModal.css"; // Add necessary styling
+import "../Profile/ProfileModal.css"; // Add necessary styling
 import avatarImage from "../../assets/userlogo.png"; // Replace with your image path
 import { FaFacebookF, FaTwitter, FaSkype } from "react-icons/fa";
 
-function ProfileModal() {
+function ProfileMedecin() {
   return (
     <div className="profile-modal">
       {/* Profile Image */}
@@ -34,12 +33,12 @@ function ProfileModal() {
           <p>Type Email Address</p>
         </div>
         <div>
-          <h4>Speciality or LicenseNumber</h4>
-          <p>Speciality or LicenseNumber</p>
+          <h4>Speciality </h4>
+          <p>Speciality </p>
         </div>
       </div>
     </div>
   );
 }
 
-export default ProfileModal;
+export default ProfileMedecin;

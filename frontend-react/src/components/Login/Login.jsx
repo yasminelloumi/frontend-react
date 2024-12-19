@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import background from "../../assets/background.jpg";
@@ -238,7 +238,7 @@ function LoginSection() {
                         color: "#333",
                       }}
                     >
-                      Don't have an account?{" "}
+                      Don&apos;t have an account?{" "}
                       <Link
                         to="/Register"
                         style={{

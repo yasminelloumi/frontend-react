@@ -22,6 +22,9 @@ import GestionPatients from "./components/administrateur/GestionPatients";
 import AjouterOrdonnance from "./components/administrateur/GestionOrdonnances";
 import MedicamentManagement from "./components/administrateur/GestionMedicaments";
 import MedicationProvider from "./components/Fournisseur/MedicationProvider";
+import MedecinMenu from "./components/Medecin/MedecinMenu";
+import EnvoyerOrdonnance from "./components/Medecin/EnvoyerOrdonnance";
+import ProfileMedecin from "./components/Medecin/ProfileMedecin";
 import { FaHome } from "react-icons/fa";
 
 import Home from "./components/Pages/Home";
@@ -53,6 +56,9 @@ const AppContent = () => {
           <Route path="/GestionPersonnel" element={<GestionPersonnel />} />
           <Route path="/GestionPatients" element={<GestionPatients />} />
           <Route path="/AjouterOrdonnance" element={<AjouterOrdonnance />} />
+          <Route path="/MedecinMenu" element={<MedecinMenu />} />
+          <Route path="/ProfileMedecin" element={<ProfileMedecin />} />
+          <Route path="/EnvoyerOrdonnance" element={<EnvoyerOrdonnance />} />
           <Route
             path="/MedicamentManagement"
             element={<MedicamentManagement />}

@@ -2,9 +2,9 @@ import HomeBackground from "../../assets/téléchargement.png";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom"; // Import useNavigate for navigation
-import "./OverlapStructure.css";
+import "../OverlapStructure/OverlapStructure.css"
 
-const OverlapStructure = () => {
+const MedecinMenu = () => {
   const navigate = useNavigate(); // Initialize navigate function
 
   const handleNavigation = (path) => {
@@ -91,37 +91,9 @@ const OverlapStructure = () => {
           </Card.Body>
         </Card>
 
-        {/* Doctor Card */}
-        <Card className="shadow-box" style={{ width: "18rem" }}>
-          <Card.Img
-            variant="top"
-            src="https://static.vecteezy.com/ti/vecteur-libre/p1/7686631-personnel-medical-de-medecins-et-infirmiers-groupe-de-medecins-vecteur-plat-cartoon-illustraiton-gratuit-vectoriel.jpg"
-            style={{ height: "150px", objectFit: "cover" }}
-          />
-          <Card.Body>
-            <Card.Title>Doctor</Card.Title>
-            <Card.Text>Log in to consult your patients and their records.</Card.Text>
-            <Button variant="success" onClick={() => handleNavigation("/MedecinListe")}>
-              Access
-            </Button>
-          </Card.Body>
-        </Card>
+        
 
-        {/* Medication Card */}
-        <Card className="shadow-box" style={{ width: "18rem" }}>
-          <Card.Img
-            variant="top"
-            src="https://static.vecteezy.com/ti/vecteur-libre/p1/11854465-modele-de-pharmacie-magasin-d-illustration-plat-dessin-anime-dessine-a-la-main-pour-la-vente-de-medicaments-un-pharmacien-des-medicaments-des-capsules-et-une-bouteille-vectoriel.jpg"
-            style={{ height: "150px", objectFit: "cover" }}
-          />
-          <Card.Body>
-            <Card.Title>Medication</Card.Title>
-            <Card.Text>Search for detailed information about medications.</Card.Text>
-            <Button variant="info" onClick={() => handleNavigation("/ListeMedicament")}>
-              Access
-            </Button>
-          </Card.Body>
-        </Card>
+       
 
         {/* Prescription Card */}
         <Card className="shadow-box" style={{ width: "18rem" }}>
@@ -132,8 +104,8 @@ const OverlapStructure = () => {
           />
           <Card.Body>
             <Card.Title>Prescription</Card.Title>
-            <Card.Text>Generate and view your electronic prescriptions.</Card.Text>
-            <Button variant="warning" onClick={() => handleNavigation("/ListeOrdonnance")}>
+            <Card.Text>Send electronic prescriptions.</Card.Text>
+            <Button variant="warning" onClick={() => handleNavigation("/EnvoyerOrdonnance")}>
               Access
             </Button>
           </Card.Body>
@@ -143,4 +115,4 @@ const OverlapStructure = () => {
   );
 };
 
-export default OverlapStructure;
+export default MedecinMenu;
