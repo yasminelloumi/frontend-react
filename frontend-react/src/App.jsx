@@ -27,6 +27,7 @@ import { FaHome } from "react-icons/fa";
 import Home from "./components/Pages/Home";
 import ContactForm from "./components/Contact/Contact";
 import AlerteMedicaments from "./components/administrateur/AlerteMedicaments";
+import GestionMedecin from "./components/administrateur/GestionMedecin";
 
 const AppContent = () => {
   const location = useLocation();
@@ -53,6 +54,7 @@ const AppContent = () => {
           <Route path="/GestionPersonnel" element={<GestionPersonnel />} />
           <Route path="/GestionPatients" element={<GestionPatients />} />
           <Route path="/AjouterOrdonnance" element={<AjouterOrdonnance />} />
+          <Route path="/GestionMedecin" element={<GestionMedecin/>}></Route>
           <Route
             path="/MedicamentManagement"
             element={<MedicamentManagement />}
