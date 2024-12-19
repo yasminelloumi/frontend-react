@@ -30,6 +30,8 @@ import Home from "./components/Pages/Home";
 import ContactForm from "./components/Contact/Contact";
 import AlerteMedicaments from "./components/administrateur/AlerteMedicaments";
 import GestionMedecin from "./components/administrateur/GestionMedecin";
+import ProfileMedecin from "./components/Medecin/ProfileMedecin";
+import EnvoyerOrdonnance from "./components/Medecin/EnvoyerOrdonnance";
 
 const AppContent = () => {
   const location = useLocation();
@@ -56,9 +58,16 @@ const AppContent = () => {
           <Route path="/GestionPersonnel" element={<GestionPersonnel />} />
           <Route path="/GestionPatients" element={<GestionPatients />} />
           <Route path="/AjouterOrdonnance" element={<AjouterOrdonnance />} />
-          <Route path="/GestionMedecin" element={<GestionMedecin/>}></Route>
-          <Route path="/GestionPharmacien" element={<GestionPharmacien/>}></Route>
-          <Route path="/GestionUsers" element={<GestionUsers/>}></Route>
+          <Route path="/GestionMedecin" element={<GestionMedecin />} />
+          <Route path="/GestionPharmacien" element={<GestionPharmacien />} />
+          <Route path="/GestionUsers" element={<GestionUsers />} />
+          <Route path="/MedecinMenu" element={<MedecinListe />} />
+          <Route path="/ProfileMedecin" element={<ProfileMedecin />} />
+          <Route
+            path="/EnvoyerOrdonnance"
+            element={<EnvoyerOrdonnance />}
+          />{" "}
+          {/* Missing closing bracket */}
           <Route
             path="/MedicamentManagement"
             element={<MedicamentManagement />}
@@ -84,7 +93,6 @@ const App = () => {
     <Router>
       <AppContent />
     </Router>
-    
   );
 };
 
