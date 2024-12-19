@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import background from "../../assets/background.jpg";
 import logo from "../../assets/Logoo.png";
 import "mdb-react-ui-kit/dist/css/mdb.min.css";
@@ -14,6 +15,7 @@ function RegisterSection() {
   const [specialite, setSpecialite] = useState("");
   const [licenseNumber, setLicenseNumber] = useState("");
   const [role, setRole] = useState("pharmacien");
+  const navigate = useNavigate(); // Use React Router's navigate hook
 
   const handleUserNameChange = (value) => {
     setName(value);
@@ -44,11 +46,13 @@ function RegisterSection() {
       LicenseNumber: licenseNumber,
       Specialite: specialite,
     };
+
     const url = "/api/account/register";
     axios
       .post(url, data)
       .then((result) => {
         alert(result.data);
+        navigate("/login"); // Redirect to /login upon success
       })
       .catch((error) => {
         alert(error);
@@ -138,7 +142,11 @@ function RegisterSection() {
                   className="form-control"
                   value={userName}
                   onChange={(e) => handleUserNameChange(e.target.value)}
-                  style={{ fontSize: "1.2rem", height: "50px", padding: "10px 15px" }}
+                  style={{
+                    fontSize: "1.2rem",
+                    height: "50px",
+                    padding: "10px 15px",
+                  }}
                 />
                 <label className="form-label" style={{ fontSize: "1rem" }}>
                   Username
@@ -151,7 +159,11 @@ function RegisterSection() {
                   className="form-control"
                   value={email}
                   onChange={(e) => handleEmailChange(e.target.value)}
-                  style={{ fontSize: "1.2rem", height: "50px", padding: "10px 15px" }}
+                  style={{
+                    fontSize: "1.2rem",
+                    height: "50px",
+                    padding: "10px 15px",
+                  }}
                 />
                 <label className="form-label" style={{ fontSize: "1rem" }}>
                   Email address
@@ -164,7 +176,11 @@ function RegisterSection() {
                   className="form-control"
                   value={password}
                   onChange={(e) => handlePasswordChange(e.target.value)}
-                  style={{ fontSize: "1.2rem", height: "50px", padding: "10px 15px" }}
+                  style={{
+                    fontSize: "1.2rem",
+                    height: "50px",
+                    padding: "10px 15px",
+                  }}
                 />
                 <label className="form-label" style={{ fontSize: "1rem" }}>
                   Password
@@ -199,7 +215,11 @@ function RegisterSection() {
                     className="form-control"
                     value={specialite}
                     onChange={(e) => handleSpecialiteChange(e.target.value)}
-                    style={{ fontSize: "1.2rem", height: "50px", padding: "10px 15px" }}
+                    style={{
+                      fontSize: "1.2rem",
+                      height: "50px",
+                      padding: "10px 15px",
+                    }}
                   />
                   <label className="form-label" style={{ fontSize: "1rem" }}>
                     Speciality
@@ -214,7 +234,11 @@ function RegisterSection() {
                     className="form-control"
                     value={licenseNumber}
                     onChange={(e) => handleLicenseNumberChange(e.target.value)}
-                    style={{ fontSize: "1.2rem", height: "50px", padding: "10px 15px" }}
+                    style={{
+                      fontSize: "1.2rem",
+                      height: "50px",
+                      padding: "10px 15px",
+                    }}
                   />
                   <label className="form-label" style={{ fontSize: "1rem" }}>
                     License Number
@@ -222,9 +246,7 @@ function RegisterSection() {
                 </div>
               )}
 
-              <div
-                style={{ display: "flex", justifyContent: "center" }}
-              >
+              <div style={{ display: "flex", justifyContent: "center" }}>
                 <button
                   type="button"
                   className="btn btn-block mb-3"
@@ -235,14 +257,21 @@ function RegisterSection() {
                     backgroundColor: "#5BAAA4",
                     borderColor: "#5BAAA4",
                     color: "#FFFFFF",
-                    transition: "background-color 0.3s ease, transform 0.2s ease",
+                    transition:
+                      "background-color 0.3s ease, transform 0.2s ease",
                     boxShadow: "0px 3px 5px rgba(0, 0, 0, 0.1)",
                     cursor: "pointer",
                     width: "250px",
                   }}
-                  onMouseEnter={(e) => (e.target.style.backgroundColor = "#4A998D")}
-                  onMouseLeave={(e) => (e.target.style.backgroundColor = "#5BAAA4")}
-                  onMouseDown={(e) => (e.target.style.transform = "scale(0.95)")}
+                  onMouseEnter={(e) =>
+                    (e.target.style.backgroundColor = "#4A998D")
+                  }
+                  onMouseLeave={(e) =>
+                    (e.target.style.backgroundColor = "#5BAAA4")
+                  }
+                  onMouseDown={(e) =>
+                    (e.target.style.transform = "scale(0.95)")
+                  }
                   onMouseUp={(e) => (e.target.style.transform = "scale(1)")}
                   onClick={handleSave}
                 >
@@ -251,14 +280,18 @@ function RegisterSection() {
               </div>
               {/* Login Link */}
               <p style={{ marginTop: "20px", fontSize: "1rem", color: "#333" }}>
-                      You have an Account Already?{" "}
-                      <Link
-                        to="/Login"
-                        style={{ color: "#000000", textDecoration: "none", fontWeight: "bold" }}
-                      >
-                        Login
-                      </Link>
-                    </p>
+                You have an Account Already?{" "}
+                <Link
+                  to="/Login"
+                  style={{
+                    color: "#000000",
+                    textDecoration: "none",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Login
+                </Link>
+              </p>
             </form>
           </div>
         </div>

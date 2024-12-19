@@ -16,7 +16,7 @@ import ListeOrdonnance from "./components/Ordonnance/ListeOrdonnance";
 import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
 import AdminProfile from "./components/administrateur/ProfileAdmin";
-import MenuProfile from "./components/administrateur/MenuAdmin";
+import MenuProfile from "./components/administrateur/MenuProfile";
 import GestionPersonnel from "./components/administrateur/Gestionpersonnel";
 import GestionPatients from "./components/administrateur/GestionPatients";
 import AjouterOrdonnance from "./components/administrateur/GestionOrdonnances";
@@ -78,6 +78,7 @@ const App = () => {
     <Router>
       <AppContent />
     </Router>
+    
   );
 };
 

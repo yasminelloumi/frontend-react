@@ -3,7 +3,7 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom"; // Import useNavigate for navigation
 
-const Body = () => {
+const MenuProfile = () => {
   const navigate = useNavigate(); // Initialize navigate function
 
   const handleNavigation = (path) => {
@@ -13,7 +13,6 @@ const Body = () => {
   return (
     <>
       <div className="container vh-100 d-flex flex-column justify-content-center align-items-center bg-light">
-        
         {/* Card section */}
         <div className="w-100 d-flex justify-content-center py-5">
           <div className="row w-100 row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
@@ -29,7 +28,8 @@ const Body = () => {
                 <Card.Body>
                   <Card.Title>Patient</Card.Title>
                   <Card.Text>
-                    Access your personal space and manage your medical information.
+                    Access your personal space and manage your medical
+                    information.
                   </Card.Text>
                   <Button
                     variant="primary"
@@ -114,10 +114,9 @@ const Body = () => {
             </div>
           </div>
         </div>
-
       </div>
     </>
   );
 };
 
-export default Body;
+export default MenuProfile;

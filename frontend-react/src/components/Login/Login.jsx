@@ -3,12 +3,13 @@ import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import background from "../../assets/background.jpg";
 import logo from "../../assets/Logoo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
 import axios from "axios";
 import "./Login.css";
 
 function LoginSection() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showForm, setShowForm] = useState(false);
@@ -27,22 +28,44 @@ function LoginSection() {
       Password: password,
     };
     const url = "/api/account/login";
+
     axios
       .post(url, data)
       .then((result) => {
-        // Check if result contains a token and show it
+        // Check if the response contains a token and role
         if (result.data && result.data.token) {
-          alert("Login successful! Token: " + result.data.token);
+          alert(
+            "Login successful! Token: " +
+              result.data.token +
+              "ROLE!!!!!:" +
+              result.data.roles
+          );
 
-          // Optionally store token in localStorage or sessionStorage
-          localStorage.setItem("authToken", result.data.token); // Example
+          // Role-based redirection
+          const userRole = result.data.roles;
+          if (userRole === "pharmacien") {
+            navigate("/"); // Redirect to Pharmacien page
+          } else if (userRole === "medecin") {
+            navigate("/"); // Redirect to Medecin page
+          } else if (userRole === "fournisseur") {
+            navigate("/MedicationProvider"); // Redirect to Medication Provider page
+          } else if (userRole === "admin") {
+            navigate("/MenuProfile"); // Redirect to Medication Provider page
+          } else {
+            alert("Unknown role, please contact support.");
+          }
+
+          // Store token in localStorage
+          localStorage.setItem("authToken", result.data.token);
         } else {
-          alert("Login failed: Token not received.");
+          alert("Login failed: Token or role not received.");
         }
       })
       .catch((error) => {
-        // Handling error and alerting user
-        alert(error.response ? error.response.data.message : "An error occurred");
+        // Gracefully handle errors
+        const errorMessage =
+          error.response?.data?.message || "An error occurred during login.";
+        alert(errorMessage);
       });
   };
 
@@ -93,14 +116,11 @@ function LoginSection() {
         className="text-center"
         style={{
           minHeight: "100vh",
-          margin: 0,
-          padding: 0,
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
           position: "relative",
-          overflow: "hidden",
         }}
       >
         <div
@@ -116,7 +136,6 @@ function LoginSection() {
           }}
         ></div>
 
-        {/* Card with Gradient Background */}
         <CSSTransition
           in={showForm}
           timeout={500}
@@ -127,11 +146,9 @@ function LoginSection() {
             className="card mx-4 mx-md-5 shadow-5-strong"
             style={{
               width: "800px",
-              maxWidth: "1000px",
               padding: "45px",
-              backdropFilter: "none",
               background:
-                "linear-gradient(to bottom, rgba(500,190,216,0), #dcedf0, #77e6cd, #dcedf0)",
+                "linear-gradient(to bottom, rgba(255, 255, 255, 0), #dcedf0, #77e6cd, #dcedf0)",
             }}
           >
             <div className="card-body py-4 px-md-4">
@@ -141,10 +158,7 @@ function LoginSection() {
                     <img
                       src={logo}
                       alt="Logo"
-                      style={{
-                        maxWidth: "150px",
-                        marginBottom: "15px",
-                      }}
+                      style={{ maxWidth: "150px", marginBottom: "15px" }}
                     />
                   </div>
                   <h2 className="fw-bold mb-4" style={{ fontSize: "2.2rem" }}>
@@ -198,12 +212,7 @@ function LoginSection() {
                     </div>
 
                     {/* Submit Button */}
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "center",
-                      }}
-                    >
+                    <div style={{ display: "flex", justifyContent: "center" }}>
                       <button
                         type="button"
                         className="btn btn-block mb-3"
@@ -212,11 +221,7 @@ function LoginSection() {
                           padding: "15px 30px",
                           borderRadius: "30px",
                           backgroundColor: "#5BAAA4",
-                          borderColor: "#5BAAA4",
                           color: "#FFFFFF",
-                          transition: "background-color 0.3s ease, transform 0.2s ease",
-                          boxShadow: "0px 3px 5px rgba(0, 0, 0, 0.1)",
-                          cursor: "pointer",
                           width: "250px",
                         }}
                         onClick={handleLogin}
@@ -226,7 +231,13 @@ function LoginSection() {
                     </div>
 
                     {/* Register Link */}
-                    <p style={{ marginTop: "20px", fontSize: "1rem", color: "#333" }}>
+                    <p
+                      style={{
+                        marginTop: "20px",
+                        fontSize: "1rem",
+                        color: "#333",
+                      }}
+                    >
                       Don't have an account?{" "}
                       <Link
                         to="/Register"
@@ -248,6 +259,6 @@ function LoginSection() {
       </section>
     </div>
   );
-};
+}
 
 export default LoginSection;
