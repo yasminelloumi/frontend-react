@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-import { Table, Container, Modal, Form, Button } from "react-bootstrap";
+import { Table, Container, Button, Modal, Form } from "react-bootstrap";
+import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import axios from "axios";
 
-function GestionMedecin() {
+function GestionUsers() {
   const [userName, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -25,16 +26,17 @@ function GestionMedecin() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get(`${apiUrl}/medecins`);
+        const response = await axios.get(`${apiUrl}/List Of Users`);
         const personnelData = response.data.map((person) => ({
           Id: person.id,
           nom: person.userName,
           email: person.email,
           specialite: person.specialite || "N/A",
+          role: person.role,
         }));
         setPersonnels(personnelData);
       } catch (error) {
-        console.error("There was an error fetching the medecins!", error);
+        console.error("There was an error fetching the users!", error);
       }
     };
     fetchUsers();
@@ -76,7 +78,7 @@ function GestionMedecin() {
         setPersonnels((prev) =>
           prev.map((personnel) =>
             personnel.Id === currentPersonnel.Id
-              ? { ...personnel, nom: userName, email, specialite }
+              ? { ...personnel, nom: userName, email, specialite, role }
               : personnel
           )
         );
@@ -91,6 +93,7 @@ function GestionMedecin() {
             nom: userName,
             email: email,
             specialite: role === "medecin" ? specialite : "N/A",
+            role: role,
           },
         ]);
       }
@@ -101,16 +104,40 @@ function GestionMedecin() {
     }
   };
 
+  const handleEdit = (personnel) => {
+    setCurrentPersonnel(personnel);
+    setName(personnel.nom);
+    setEmail(personnel.email);
+    setRole(personnel.role);
+    setSpecialite(personnel.specialite);
+    setShowModal(true);
+  };
+
+  const handleDelete = async (email) => {
+    try {
+      await axios.delete(`${apiUrl}/${email}`);
+      setPersonnels((prev) =>
+        prev.filter((personnel) => personnel.email !== email)
+      );
+    } catch (error) {
+      console.error("Error deleting personnel:", error);
+    }
+  };
+
   return (
     <Container className="mt-5">
-      <h2 className="mb-4">List of Medecins</h2>
+      <h2 className="mb-4">List Of Users</h2>
+      <Button variant="primary" className="mb-3" onClick={handleShow}>
+        Add User
+      </Button>
       <Table striped bordered hover responsive>
         <thead>
           <tr>
             <th>ID</th>
             <th>Name</th>
             <th>Email</th>
-            <th>Speciality</th>
+            <th>Role</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -119,7 +146,23 @@ function GestionMedecin() {
               <td>{personnel.Id}</td>
               <td>{personnel.nom}</td>
               <td>{personnel.email}</td>
-              <td>{personnel.specialite}</td>
+              <td>{personnel.role}</td>
+              <td>
+                <Button
+                  variant="link"
+                  className="text-info p-0"
+                  onClick={() => handleEdit(personnel)}
+                >
+                  <FaEdit size={20} />
+                </Button>
+                <Button
+                  variant="link"
+                  className="text-danger p-0 ml-2"
+                  onClick={() => handleDelete(personnel.email)}
+                >
+                  <FaTrashAlt size={20} />
+                </Button>
+              </td>
             </tr>
           ))}
         </tbody>
@@ -155,33 +198,40 @@ function GestionMedecin() {
               />
             </Form.Group>
 
-            <Form.Group controlId="formPassword">
-              <Form.Label>Password</Form.Label>
-              <Form.Control
-                type="password"
-                name="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Password"
-              />
-            </Form.Group>
+            {/* Only show password field when adding a new user */}
+            {!currentPersonnel.Id && (
+              <Form.Group controlId="formPassword">
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                  type="password"
+                  name="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Password"
+                />
+              </Form.Group>
+            )}
 
-            <Form.Group controlId="formRole">
-              <Form.Label>Role</Form.Label>
-              <Form.Control
-                as="select"
-                name="role"
-                value={role}
-                onChange={(e) => setRole(e.target.value)}
-              >
-                <option value="medecin">Doctor</option>
-                <option value="pharmacien">Pharmacien</option>
-                <option value="fournisseur">Fournisseur</option>
-                <option value="admin">Admin</option>
-              </Form.Control>
-            </Form.Group>
+            {/* Only show role selection when adding new personnel */}
+            {!currentPersonnel.Id && (
+              <Form.Group controlId="formRole">
+                <Form.Label>Role</Form.Label>
+                <Form.Control
+                  as="select"
+                  name="role"
+                  value={role}
+                  onChange={(e) => setRole(e.target.value)}
+                >
+                  <option value="medecin">Doctor</option>
+                  <option value="pharmacien">Pharmacien</option>
+                  <option value="fournisseur">Fournisseur</option>
+                  <option value="admin">Admin</option>
+                </Form.Control>
+              </Form.Group>
+            )}
 
-            {role === "medecin" && (
+            {/* Show these fields only if creating a new user */}
+            {role === "medecin" && currentPersonnel.Id === null && (
               <Form.Group controlId="formSpecialite">
                 <Form.Label>Speciality</Form.Label>
                 <Form.Control
@@ -194,7 +244,7 @@ function GestionMedecin() {
               </Form.Group>
             )}
 
-            {role === "pharmacien" && (
+            {role === "pharmacien" && currentPersonnel.Id === null && (
               <Form.Group controlId="formLicenseNumber">
                 <Form.Label>License Number</Form.Label>
                 <Form.Control
@@ -221,4 +271,4 @@ function GestionMedecin() {
   );
 }
 
-export default GestionMedecin;
+export default GestionUsers;

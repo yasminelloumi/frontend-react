@@ -20,6 +20,8 @@ import MenuProfile from "./components/administrateur/MenuProfile";
 import GestionPersonnel from "./components/administrateur/Gestionpersonnel";
 import GestionPatients from "./components/administrateur/GestionPatients";
 import AjouterOrdonnance from "./components/administrateur/GestionOrdonnances";
+import GestionUsers from "./components/administrateur/GestionUsers";
+import GestionPharmacien from "./components/administrateur/GestionPharmacien";
 import MedicamentManagement from "./components/administrateur/GestionMedicaments";
 import MedicationProvider from "./components/Fournisseur/MedicationProvider";
 import { FaHome } from "react-icons/fa";
@@ -55,6 +57,8 @@ const AppContent = () => {
           <Route path="/GestionPatients" element={<GestionPatients />} />
           <Route path="/AjouterOrdonnance" element={<AjouterOrdonnance />} />
           <Route path="/GestionMedecin" element={<GestionMedecin/>}></Route>
+          <Route path="/GestionPharmacien" element={<GestionPharmacien/>}></Route>
+          <Route path="/GestionUsers" element={<GestionUsers/>}></Route>
           <Route
             path="/MedicamentManagement"
             element={<MedicamentManagement />}
