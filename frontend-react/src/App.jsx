@@ -24,8 +24,9 @@ import MedicamentManagement from "./components/administrateur/GestionMedicaments
 import MedicationProvider from "./components/Fournisseur/MedicationProvider";
 import { FaHome } from "react-icons/fa";
 
+import Home from "./components/Pages/Home";
 import ContactForm from "./components/Contact/Contact";
-import Home from "./components/pages/home";
+import AlerteMedicaments from "./components/administrateur/AlerteMedicaments";
 
 const AppContent = () => {
   const location = useLocation();
@@ -42,7 +43,7 @@ const AppContent = () => {
 
       <main>
         <Routes>
-          <Route path="/" element={<Home/>} /> {/* Page d'accueil */}
+          <Route path="/" element={<Home />} /> {/* Page d'accueil */}
           <Route path="/ListePatient" element={<ListePatient />} />
           <Route path="/MedecinListe" element={<MedecinListe />} />
           <Route path="/ListeMedicament" element={<ListeMedicament />} />
@@ -60,6 +61,7 @@ const AppContent = () => {
           <Route path="/contact" element={<ContactForm />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/Register" element={<Register />} />
+          <Route path="/AlerteMedicaments" element={<AlerteMedicaments />} />
           <Route path="*" element={<div>404 - Page Not Found</div>} />{" "}
           {/* Fallback Route */}
         </Routes>
