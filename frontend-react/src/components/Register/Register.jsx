@@ -52,7 +52,7 @@ function RegisterSection() {
       .post(url, data)
       .then((result) => {
         alert(result.data);
-        navigate("/login"); // Redirect to /login upon success
+        navigate("/Login"); // Redirect to /login upon success
       })
       .catch((error) => {
         alert(error);

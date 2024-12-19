@@ -37,9 +37,13 @@ function LoginSection() {
           alert(
             "Login successful! Token: " +
               result.data.token +
-              "ROLE!!!!!:" +
+              " ROLE: " +
               result.data.roles
           );
+
+          // Store token and user details in localStorage
+          localStorage.setItem("authToken", result.data.token);
+          localStorage.setItem("user", JSON.stringify(result.data.user));
 
           // Role-based redirection
           const userRole = result.data.roles;
@@ -50,13 +54,10 @@ function LoginSection() {
           } else if (userRole === "fournisseur") {
             navigate("/MedicationProvider"); // Redirect to Medication Provider page
           } else if (userRole === "admin") {
-            navigate("/MenuProfile"); // Redirect to Medication Provider page
+            navigate("/MenuProfile"); // Redirect to Admin page
           } else {
             alert("Unknown role, please contact support.");
           }
-
-          // Store token in localStorage
-          localStorage.setItem("authToken", result.data.token);
         } else {
           alert("Login failed: Token or role not received.");
         }
