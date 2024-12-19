@@ -1,16 +1,53 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import background from "../../assets/background.jpg";
 import logo from "../../assets/Logoo.png";
 import { Link } from "react-router-dom";
-import { CSSTransition } from "react-transition-group"; 
-import "./Login.css"
-const LoginSection = () => {
-  const [showForm, setShowForm] = useState(false); // Manage the form visibility for the animation
+import { CSSTransition } from "react-transition-group";
+import axios from "axios";
+import "./Login.css";
 
+function LoginSection() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showForm, setShowForm] = useState(false);
+
+  const handleEmailChange = (value) => {
+    setEmail(value);
+  };
+
+  const handlePasswordChange = (value) => {
+    setPassword(value);
+  };
+
+  const handleLogin = () => {
+    const data = {
+      Email: email,
+      Password: password,
+    };
+    const url = "/api/account/login";
+    axios
+      .post(url, data)
+      .then((result) => {
+        // Check if result contains a token and show it
+        if (result.data && result.data.token) {
+          alert("Login successful! Token: " + result.data.token);
+
+          // Optionally store token in localStorage or sessionStorage
+          localStorage.setItem("authToken", result.data.token); // Example
+        } else {
+          alert("Login failed: Token not received.");
+        }
+      })
+      .catch((error) => {
+        // Handling error and alerting user
+        alert(error.response ? error.response.data.message : "An error occurred");
+      });
+  };
+
+  // Trigger animation on component mount
   useEffect(() => {
-    // Trigger the animation when the component mounts
     setShowForm(true);
   }, []);
 
@@ -27,7 +64,7 @@ const LoginSection = () => {
             background-position: center;
             background-attachment: fixed;
           }
-          
+
           .slide-enter {
             transform: translateY(-100%);
             opacity: 0;
@@ -93,7 +130,8 @@ const LoginSection = () => {
               maxWidth: "1000px",
               padding: "45px",
               backdropFilter: "none",
-              background: "linear-gradient(to bottom, rgba(500,190,216,0), #dcedf0, #77e6cd, #dcedf0)",
+              background:
+                "linear-gradient(to bottom, rgba(500,190,216,0), #dcedf0, #77e6cd, #dcedf0)",
             }}
           >
             <div className="card-body py-4 px-md-4">
@@ -124,6 +162,8 @@ const LoginSection = () => {
                           height: "50px",
                           padding: "10px 15px",
                         }}
+                        value={email}
+                        onChange={(e) => handleEmailChange(e.target.value)}
                       />
                       <label
                         className="form-label"
@@ -145,6 +185,8 @@ const LoginSection = () => {
                           height: "50px",
                           padding: "10px 15px",
                         }}
+                        value={password}
+                        onChange={(e) => handlePasswordChange(e.target.value)}
                       />
                       <label
                         className="form-label"
@@ -152,27 +194,6 @@ const LoginSection = () => {
                         style={{ fontSize: "1rem" }}
                       >
                         Password
-                      </label>
-                    </div>
-
-                    {/* Checkbox */}
-                    <div className="form-check d-flex justify-content-center mb-3">
-                      <input
-                        className="form-check-input me-2"
-                        type="checkbox"
-                        value=""
-                        id="form2Example33"
-                        defaultChecked
-                        style={{
-                          transform: "scale(1.2)",
-                        }}
-                      />
-                      <label
-                        className="form-check-label"
-                        htmlFor="form2Example33"
-                        style={{ fontSize: "1rem" }}
-                      >
-                        Remember me
                       </label>
                     </div>
 
@@ -184,7 +205,7 @@ const LoginSection = () => {
                       }}
                     >
                       <button
-                        type="submit"
+                        type="button"
                         className="btn btn-block mb-3"
                         style={{
                           fontSize: "1.2rem",
@@ -198,10 +219,7 @@ const LoginSection = () => {
                           cursor: "pointer",
                           width: "250px",
                         }}
-                        onMouseEnter={(e) => (e.target.style.backgroundColor = "#5BAAA4")}
-                        onMouseLeave={(e) => (e.target.style.backgroundColor = "#4A998D")}
-                        onMouseDown={(e) => (e.target.style.transform = "scale(0.95)")}
-                        onMouseUp={(e) => (e.target.style.transform = "scale(1)")}
+                        onClick={handleLogin}
                       >
                         Sign In
                       </button>
@@ -212,7 +230,11 @@ const LoginSection = () => {
                       Don't have an account?{" "}
                       <Link
                         to="/Register"
-                        style={{ color: "#000000", textDecoration: "none", fontWeight: "bold" }}
+                        style={{
+                          color: "#000000",
+                          textDecoration: "none",
+                          fontWeight: "bold",
+                        }}
                       >
                         Register
                       </Link>
