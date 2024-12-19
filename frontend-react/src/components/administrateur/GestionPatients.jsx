@@ -1,30 +1,10 @@
-import { useState } from "react";
-import { Table, Modal, Form, Button } from "react-bootstrap"; // Importer Button de react-bootstrap
-import { FaEdit, FaTrash } from "react-icons/fa";  // Importer les icônes
+import { useState, useEffect } from "react";
+import { Table, Modal, Form, Button, InputGroup, FormControl } from "react-bootstrap";
+import { FaEdit, FaTrash } from "react-icons/fa";
+import axios from "axios";
 
 function PatientManagement() {
-  // Liste initiale de patients
-  const [patients, setPatients] = useState([
-    {
-      ID: 1,
-      NamePatient: "John Doe",
-      DateOfBirth: "1990-05-15",
-      MedicalHistory: "Hypertension, Diabetes",
-    },
-    {
-      ID: 2,
-      NamePatient: "Jane Smith",
-      DateOfBirth: "1985-11-25",
-      MedicalHistory: "Asthma",
-    },
-    {
-      ID: 3,
-      NamePatient: "Alice Brown",
-      DateOfBirth: "2000-01-05",
-      MedicalHistory: "No significant history",
-    },
-  ]);
-
+  const [patients, setPatients] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const [currentPatient, setCurrentPatient] = useState({
@@ -32,58 +12,95 @@ function PatientManagement() {
     NamePatient: "",
     DateOfBirth: "",
   });
+  const [searchTerm, setSearchTerm] = useState(""); // Term for search
 
-  // Open modal to add or edit a patient
+  const fetchPatients = async () => {
+    try {
+      const response = await axios.get("http://localhost:5026/api/Patient");
+      setPatients(response.data);
+    } catch (error) {
+      console.error("Error fetching patients:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchPatients();
+  }, []);
+
   const handleShowModal = (patient = null) => {
-    setEditMode(!!patient); // If a patient is passed, it's edit mode
-    setCurrentPatient(
-      patient || { ID: "", NamePatient: "", DateOfBirth: "" } // Medical history removed
-    );
+    setEditMode(!!patient);
+    setCurrentPatient(patient || { id: "", namePatient: "", dateOfBirth: "" });
     setShowModal(true);
   };
 
-  // Close the modal
   const handleCloseModal = () => {
     setShowModal(false);
-    setCurrentPatient({
-      ID: "",
-      NamePatient: "",
-      DateOfBirth: "",
-    });
+    setCurrentPatient({ id: "", namePatient: "", dateOfBirth: "" });
   };
 
-  // Add or edit a patient
-  const handleSavePatient = () => {
-    if (editMode) {
-      // Edit mode: Update an existing patient
-      setPatients((prev) =>
-        prev.map((p) =>
-          p.ID === currentPatient.ID ? { ...currentPatient } : p
-        )
-      );
-    } else {
-      // Add mode: Add a new patient
-      setPatients((prev) => [
-        ...prev,
-        { ...currentPatient, ID: prev.length + 1 },
-      ]);
+  const handleSavePatient = async () => {
+    try {
+      if (editMode) {
+        await axios.put(`http://localhost:5026/api/Patient/${currentPatient.id}`, currentPatient);
+      } else {
+        await axios.post("http://localhost:5026/api/Patient", currentPatient);
+      }
+      fetchPatients();
+      handleCloseModal();
+    } catch (error) {
+      console.error("Error saving patient:", error);
     }
-    handleCloseModal();
   };
 
-  // Delete a patient
-  const handleDeletePatient = (id) => {
-    setPatients((prev) => prev.filter((patient) => patient.ID !== id));
+  const handleDeletePatient = async (id) => {
+    try {
+      await axios.delete(`http://localhost:5026/api/Patient/${id}`);
+      fetchPatients();
+    } catch (error) {
+      console.error("Error deleting patient:", error);
+    }
   };
+
+  // Search patients
+  const handleSearch = async () => {
+    if (!searchTerm.trim()) {
+      alert("Please enter a valid search term.");
+      return;
+    }
+  
+    try {
+      const response = await axios.get(`http://localhost:5026/api/Patient/search?searchTerm=${searchTerm}`);
+      setPatients(response.data); // Update patients with search results
+    } catch (error) {
+      console.error("Error searching patients:", error);
+      if (error.response && error.response.status === 404) {
+        setPatients([]); // Clear the patient list if no results are found
+      }
+    }
+  };
+  
 
   return (
     <>
       <h2 className="mt-5 mb-4">Patient Management</h2>
+
+      {/* Search bar */}
+      <InputGroup className="mb-3">
+        <FormControl
+          placeholder="Search by name or ID"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <Button variant="primary" onClick={handleSearch}>
+          Search
+        </Button>
+      </InputGroup>
+
       <Button className="mb-3" onClick={() => handleShowModal()}>
         Add Patient
       </Button>
       <Table striped bordered hover responsive>
-        <thead> 
+        <thead>
           <tr>
             <th>ID</th>
             <th>Name</th>
@@ -93,31 +110,25 @@ function PatientManagement() {
         </thead>
         <tbody>
           {patients.map((patient) => (
-            <tr key={patient.ID}>
-              <td>{patient.ID}</td>
-              <td>{patient.NamePatient}</td>
-              <td>{new Date(patient.DateOfBirth).toLocaleDateString()}</td>
+            <tr key={patient.id}>
+              <td>{patient.id}</td>
+              <td>{patient.namePatient}</td>
+              <td>{new Date(patient.dateOfBirth).toLocaleDateString()}</td>
               <td>
                 <FaEdit
                   style={{ cursor: "pointer", color: "turquoise", marginRight: 10 }}
                   onClick={() => handleShowModal(patient)}
                 />
-                <FaTrash
-                  style={{ cursor: "pointer", color: "turquoise" }}
-                  onClick={() => handleDeletePatient(patient.ID)}
-                />
+                
               </td>
             </tr>
           ))}
         </tbody>
       </Table>
 
-      {/* Modal to add or edit a patient */}
       <Modal show={showModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>
-          <Modal.Title>
-            {editMode ? "Edit Patient" : "Add Patient"}
-          </Modal.Title>
+          <Modal.Title>{editMode ? "Edit Patient" : "Add Patient"}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
@@ -126,7 +137,7 @@ function PatientManagement() {
               <Form.Control
                 type="text"
                 placeholder="Patient's Name"
-                value={currentPatient.NamePatient}
+                value={currentPatient.namePatient}
                 onChange={(e) =>
                   setCurrentPatient({
                     ...currentPatient,
@@ -139,7 +150,7 @@ function PatientManagement() {
               <Form.Label>Date of Birth</Form.Label>
               <Form.Control
                 type="date"
-                value={currentPatient.DateOfBirth}
+                value={currentPatient.dateOfBirth}
                 onChange={(e) =>
                   setCurrentPatient({
                     ...currentPatient,
