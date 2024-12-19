@@ -36,20 +36,19 @@ function ProfileModal() {
     return <div>Loading...</div>;
   }
 
-  // Conditionally render Speciality or License Number based on role
-  let specialityOrLicense;
+  // Conditionally set Speciality or License Number based on role
+  let specialityOrLicense = "Not provided";
+  let specialityOrLicenseLabel = "";
+
   if (profileData.role === "medecin") {
-    // Make sure to use correct role name
-    specialityOrLicense =
-      profileData.additionalDetails?.specialite || "Not provided"; // Access specialite from additionalDetails
+    specialityOrLicense = profileData.additionalDetails?.specialite || "Not provided"; 
+    specialityOrLicenseLabel = "Speciality"; 
   } else if (profileData.role === "pharmacien") {
-    specialityOrLicense =
-      profileData.additionalDetails?.licenseNumber || "Not provided";
-  } else if (
-    profileData.role === "fournisseur" ||
-    profileData.role === "admin"
-  ) {
-    specialityOrLicense = "";
+    specialityOrLicense = profileData.additionalDetails?.licenseNumber || "Not provided";
+    specialityOrLicenseLabel = "License Number";
+  } else if (profileData.role === "fournisseur" || profileData.role === "admin") {
+    specialityOrLicense = ""; 
+    specialityOrLicenseLabel = "";
   }
 
   return (
@@ -83,10 +82,12 @@ function ProfileModal() {
           <h4>Email Address</h4>
           <p>{profileData.email}</p>
         </div>
-        <div>
-          <h4>Speciality or License Number</h4>
-          <p>{specialityOrLicense}</p>
-        </div>
+        {specialityOrLicenseLabel && (
+          <div>
+            <h4>{specialityOrLicenseLabel}</h4>
+            <p>{specialityOrLicense}</p>
+          </div>
+        )}
       </div>
     </div>
   );
