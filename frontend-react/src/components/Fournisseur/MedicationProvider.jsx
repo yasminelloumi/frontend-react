@@ -155,18 +155,18 @@ function MedicationProvider() {
                   ))}
                 </tbody>
               </Table>
-              <Button variant="primary" onClick={handleValidateClick}>
-                Validate All Demands
-              </Button>
+             
             </>
           ) : (
             <p>No demands available.</p>
           )}
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowModal(false)}>
-            Close
-          </Button>
+        <Button variant="primary" onClick={handleValidateClick}>
+                  Validate
+              </Button>
+
+          
         </Modal.Footer>
       </Modal>
 
@@ -209,9 +209,7 @@ function MedicationProvider() {
           )}
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowFormModal(false)}>
-            Close
-          </Button>
+          
           <Button variant="primary" onClick={handleFormSubmit}>
             Submit All
           </Button>
