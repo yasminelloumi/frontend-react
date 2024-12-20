@@ -52,7 +52,7 @@ function LoginSection() {
           } else if (userRole === "medecin") {
             navigate("/"); // Redirect to Medecin page
           } else if (userRole === "fournisseur") {
-            navigate("/MedicationProvider"); // Redirect to Medication Provider page
+            navigate("/HomeFournisseur"); // Redirect to Medication Provider page
           } else if (userRole === "admin") {
             navigate("/MenuProfile"); // Redirect to Admin page
           } else {
