@@ -1,374 +1,263 @@
-import { useState, useEffect } from "react";
-import { Button, Table, Modal, Form } from "react-bootstrap";
-import { MdDelete, MdEdit, MdShoppingCart } from "react-icons/md";
-import AlerteMedicaments from "./AlerteMedicaments";
+import React, { useState } from "react";
+import { Modal, Button, Table, Form } from "react-bootstrap";
+import axios from "axios";
 
-const MedicamentManagement = () => {
-  const [medicaments, setMedicaments] = useState([
-    {
-      Id: 1,
-      Name: "Paracetamol",
-      Description: "Painkiller and antipyretic",
-      Price: 5.5,
-      StockQuantity: 100,
-      ExpiryDate: "2025-12-31",
-    },
-    {
-      Id: 2,
-      Name: "Ibuprofen",
-      Description: "Anti-inflammatory and analgesic",
-      Price: 8.0,
-      StockQuantity: 50,
-      ExpiryDate: "2024-09-15",
-    },
-    {
-      Id: 3,
-      Name: "Amoxicillin",
-      Description: "Antibiotic for infections",
-      Price: 12.0,
-      StockQuantity: 5,
-      ExpiryDate: "2026-03-10",
-    }, // Low stock for testing
-  ]);
+function MedicamentManagement() {
+  // State initialization
+  const [lowStockMedicaments, setLowStockMedicaments] = useState([]); // This stores the low stock medicaments
+  const [showAlertModal, setShowAlertModal] = useState(false); // Modal visibility state for low stock alert
+  const [alertMessage, setAlertMessage] = useState(""); // State to store the alert message
+  const [showRequestModal, setShowRequestModal] = useState(false); // Visibility for the request modal
+  const [requestData, setRequestData] = useState([]); // Store the data for the request modal
 
-  const [showModal, setShowModal] = useState(false);
-  const [showEditModal, setShowEditModal] = useState(false);
-  const [showOrderModal, setShowOrderModal] = useState(false);
-  const [newMedicament, setNewMedicament] = useState({
-    Name: "",
-    Description: "",
-    Price: "",
-    StockQuantity: "",
-    ExpiryDate: "",
-  });
+  // Fetch low stock medicaments from the backend API
+  function fetchLowStockMedicaments() {
+    axios
+      .get("/api/medicament/seuil")
+      .then((response) => {
+        console.log("API Response:", response.data);
 
-  const [medicamentToEdit, setMedicamentToEdit] = useState(null);
-  const [orderQuantity, setOrderQuantity] = useState(1);
+        // If the response is a string (message), store it in the alertMessage state
+        if (typeof response.data === "string") {
+          setAlertMessage(response.data);
+          setLowStockMedicaments([]); // Clear the medicaments list
+        }
+        // If the response is an array (list of low stock medicaments), store it in the lowStockMedicaments state
+        else if (Array.isArray(response.data)) {
+          setAlertMessage(""); // Clear the alert message
+          setLowStockMedicaments(response.data); // Store the medicaments in state
+        }
+        // Show the alert modal if there's any response (either a message or low stock medicaments)
+        setShowAlertModal(true);
+      })
+      .catch((error) => {
+        console.error("Error fetching medicaments:", error);
+        setLowStockMedicaments([]); // Reset the data in case of an error
+        setAlertMessage("An error occurred while fetching data.");
+      });
+  }
 
-  const [showAlerte, setShowAlerte] = useState(false);
+  // Handle the bell click event
+  function handleBellClick() {
+    fetchLowStockMedicaments(); // Fetch medicaments when bell is clicked
+  }
 
-  // Filtre pour les médicaments avec StockQuantity <= 10
-  const lowStockMedications = medicaments.filter(
-    (med) => med.StockQuantity <= 10
-  );
-  const stockFaible = lowStockMedications.length > 0; // Show alert if there are any low stock medications
+  // Handle modal close event for the low stock alert modal
+  function handleModalClose() {
+    setShowAlertModal(false); // Close the alert modal
+  }
 
-  // Effect to automatically show the alert if any stock quantity is 10 or less
-  useEffect(() => {
-    if (stockFaible) {
-      setShowAlerte(true); // Show alert when stock is low
-    } else {
-      setShowAlerte(false); // Hide alert if no low stock
-    }
-  }, [medicaments]); // Dependency on medicaments to re-check whenever it changes
+  // Handle "Request" button click to fetch medicament request data
+  function handleRequestClick() {
+    axios
+      .get("/api/Medicament/en-seuil-pour-demande")
+      .then((response) => {
+        console.log("Request Response:", response.data);
+        setRequestData(response.data); // Set the response data in state
+        setShowRequestModal(true); // Show the second modal with the form
+      })
+      .catch((error) => {
+        console.error("Error sending request:", error);
+        setRequestData([]); // Reset data in case of an error
+      });
+  }
 
-  // Modals and input handlers
-  const handleModalClose = () => setShowModal(false);
-  const handleModalShow = () => setShowModal(true);
-  const handleEditModalClose = () => setShowEditModal(false);
-  const handleEditModalShow = (medicament) => {
-    setMedicamentToEdit(medicament);
-    setShowEditModal(true);
-  };
+  // Handle request modal close
+  function handleRequestModalClose() {
+    setShowRequestModal(false); // Close the request modal
+  }
 
-  const handleOrderModalClose = () => setShowOrderModal(false);
-  const handleOrderModalShow = (medicament) => {
-    setOrderQuantity(1);
-    setShowOrderModal(true);
-  };
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setNewMedicament({ ...newMedicament, [name]: value });
-  };
-
-  const handleEditInputChange = (e) => {
-    const { name, value } = e.target;
-    setMedicamentToEdit({ ...medicamentToEdit, [name]: value });
-  };
-
-  const handleOrderQuantityChange = (e) => {
-    setOrderQuantity(e.target.value);
-  };
-
-  // Add and Edit actions
-  const handleAddMedicament = () => {
-    const newId = medicaments.length + 1;
-    const newMedicamentData = { Id: newId, ...newMedicament };
-    setMedicaments([...medicaments, newMedicamentData]);
-    setShowModal(false);
-    setNewMedicament({
-      Name: "",
-      Description: "",
-      Price: "",
-      StockQuantity: "",
-      ExpiryDate: "",
+  // Handle quantity change in request modal form
+  function handleQuantityChange(e, medicamentId) {
+    const updatedRequestData = requestData.map((medicament) => {
+      if (medicament.medicamentId === medicamentId) {
+        return { ...medicament, quantiteDemandee: e.target.value };
+      }
+      return medicament;
     });
-  };
+    setRequestData(updatedRequestData); // Update the requestData state
+  }
 
-  const handleEditMedicament = () => {
-    const updatedMedicaments = medicaments.map((medicament) =>
-      medicament.Id === medicamentToEdit.Id ? medicamentToEdit : medicament
-    );
-    setMedicaments(updatedMedicaments);
-    setShowEditModal(false);
-  };
+  // Handle form submission for the request modal (if you plan to submit the data)
+  function handleSubmitRequest() {
+    // Prepare the request payload with medicamentId, medicamentName, and quantiteDemandee
+    const requestPayload = requestData.map((medicament) => ({
+      medicamentId: medicament.medicamentId,  // Ensure this matches your data
+      medicamentName: medicament.medicamentName,  // Ensure medicamentName is included
+      quantiteDemandee: medicament.quantiteDemandee || 0,  // Default to 0 if not specified
+    }));
 
-  const handleDeleteMedicament = (id) => {
-    setMedicaments(medicaments.filter((medicament) => medicament.Id !== id));
-  };
+    console.log("Submitting request with data:", requestPayload);  // Log the payload for debugging
 
-  const handleOrderMedicament = () => {
-    alert(
-      `Ordering ${orderQuantity} of ${medicamentToEdit.Name} from supplier.`
-    );
-    setShowOrderModal(false);
-    setOrderQuantity(1);
-  };
+    // Send the POST request to submit the request data
+    axios
+      .post("/api/Medicament/envoyer-demande", requestPayload)
+      .then((response) => {
+        console.log("Request submitted successfully:", response.data);
+        alert("Request submitted successfully: " + response.data);  // Show success message
+
+        // After successful request, send to the fournisseur for processing
+        const fournisseurPayload = requestData.map((medicament) => ({
+          id: 0, // Default value for ID, could be updated later
+          medicamentId: medicament.medicamentId,
+          quantite: 2147483647, // Placeholder quantity
+          statut: "Pending", // Placeholder status
+          dateDemande: new Date().toISOString(), // Current date and time
+        }));
+
+        // Send the request to the fournisseur
+        axios
+          .post("/api/Fournisseur/traiter", fournisseurPayload)
+          .then((fournisseurResponse) => {
+            console.log("Fournisseur response:", fournisseurResponse.data);
+            // Show the response from fournisseur
+            alert(fournisseurResponse.data.join("\n"));
+          })
+          .catch((fournisseurError) => {
+            console.error("Error processing fournisseur request:", fournisseurError);
+            alert("Failed to send to fournisseur.");
+          });
+
+        setShowRequestModal(false);  // Close the modal on success
+      })
+      .catch((error) => {
+        // Handle error response
+        if (error.response) {
+          console.error("Error response:", error.response);
+          alert(`Request failed: ${error.response.data.message || error.message}`);
+        } else {
+          console.error("Error message:", error.message);
+        }
+      });
+  }
 
   return (
-    <div className="medicament-management">
+    <div>
       <h2>
-        Medicament Management{" "}
+        Medicament Management
+        {/* Bell Icon, changes color based on the alert state */}
         <i
           className="fa-solid fa-bell"
-          style={{ color: stockFaible ? "red" : "black", cursor: "pointer" }}
-          onClick={() => setShowAlerte(!showAlerte)}
+          style={{ color: lowStockMedicaments.length > 0 ? "red" : "black", cursor: "pointer" }}
+          onClick={handleBellClick} // Trigger the fetch function on click
         ></i>
       </h2>
 
-      {showAlerte && (
-        <AlerteMedicaments
-          lowStockMedications={lowStockMedications}
-          onUpdateQuantity={handleEditMedicament}
-          onDelete={handleDeleteMedicament}
-          onClose={() => setShowAlerte(false)}
-        />
+      {/* First Modal: Low Stock Alert */}
+      {showAlertModal && (
+        <Modal show={showAlertModal} onHide={handleModalClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Low Stock Alert</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            {/* Check if there's an alert message to display */}
+            {alertMessage ? (
+              <div>{alertMessage}</div> // Display the alert message
+            ) : (
+              <div>
+                <h5>The following medicaments have low stock:</h5>
+                <Table striped bordered hover>
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                      <th>Price</th>
+                      <th>Stock Quantity</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {/* Display the low stock medicaments */}
+                    {lowStockMedicaments.length > 0 ? (
+                      lowStockMedicaments.map((med) => (
+                        <tr key={med.medicamentId}>
+                          <td>{med.medicamentName}</td>
+                          <td>{med.description}</td>
+                          <td>{med.price}</td>
+                          <td>{med.stockQuantity}</td>
+                        </tr>
+                      ))
+                    ) : (
+                      <tr>
+                        <td colSpan="4">No low stock items found.</td>
+                      </tr>
+                    )}
+                  </tbody>
+                </Table>
+              </div>
+            )}
+            {/* Request Button to fetch data from the second endpoint */}
+            <Button variant="primary" onClick={handleRequestClick}>
+              Request
+            </Button>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleModalClose}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
       )}
 
-      <Table striped bordered hover responsive>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Price</th>
-            <th>Stock Quantity</th>
-            <th>Expiration Date</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {medicaments.map((medicament) => (
-            <tr key={medicament.Id}>
-              <td>{medicament.Id}</td>
-              <td>{medicament.Name}</td>
-              <td>{medicament.Description}</td>
-              <td>{medicament.Price} €</td>
-              <td>{medicament.StockQuantity}</td>
-              <td>{new Date(medicament.ExpiryDate).toLocaleDateString()}</td>
-              <td>
-                <Button
-                  variant="link"
-                  size="sm"
-                  className="me-2"
-                  onClick={() => handleEditModalShow(medicament)}
-                >
-                  <MdEdit />
-                </Button>
-                <Button
-                  variant="link"
-                  size="sm"
-                  onClick={() => handleDeleteMedicament(medicament.Id)}
-                >
-                  <MdDelete />
-                </Button>
-                <Button
-                  variant="link"
-                  size="sm"
-                  className="me-2"
-                  onClick={() => handleOrderModalShow(medicament)}
-                >
-                  <MdShoppingCart />
-                </Button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </Table>
-
-      <Button variant="success" onClick={handleModalShow}>
-        Add Medicament
-      </Button>
-
-      {/* Modal for adding a new medicament */}
-      <Modal show={showModal} onHide={handleModalClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Add Medicament</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form>
-            <Form.Group className="mb-3" controlId="formMedicamentName">
-              <Form.Label>Name</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Medicament Name"
-                name="Name"
-                value={newMedicament.Name}
-                onChange={handleInputChange}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formMedicamentDescription">
-              <Form.Label>Description</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Medicament Description"
-                name="Description"
-                value={newMedicament.Description}
-                onChange={handleInputChange}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formMedicamentPrice">
-              <Form.Label>Price</Form.Label>
-              <Form.Control
-                type="number"
-                placeholder="Medicament Price"
-                name="Price"
-                value={newMedicament.Price}
-                onChange={handleInputChange}
-              />
-            </Form.Group>
-            <Form.Group
-              className="mb-3"
-              controlId="formMedicamentStockQuantity"
-            >
-              <Form.Label>Stock Quantity</Form.Label>
-              <Form.Control
-                type="number"
-                placeholder="Stock Quantity"
-                name="StockQuantity"
-                value={newMedicament.StockQuantity}
-                onChange={handleInputChange}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formMedicamentExpiryDate">
-              <Form.Label>Expiration Date</Form.Label>
-              <Form.Control
-                type="date"
-                name="ExpiryDate"
-                value={newMedicament.ExpiryDate}
-                onChange={handleInputChange}
-              />
-            </Form.Group>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleModalClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleAddMedicament}>
-            Add
-          </Button>
-        </Modal.Footer>
-      </Modal>
-
-      {/* Modal for editing a medicament */}
-      <Modal show={showEditModal} onHide={handleEditModalClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Edit Medicament</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form>
-            <Form.Group className="mb-3" controlId="formMedicamentName">
-              <Form.Label>Name</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Medicament Name"
-                name="Name"
-                value={medicamentToEdit?.Name}
-                onChange={handleEditInputChange}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formMedicamentDescription">
-              <Form.Label>Description</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Medicament Description"
-                name="Description"
-                value={medicamentToEdit?.Description}
-                onChange={handleEditInputChange}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formMedicamentPrice">
-              <Form.Label>Price</Form.Label>
-              <Form.Control
-                type="number"
-                placeholder="Medicament Price"
-                name="Price"
-                value={medicamentToEdit?.Price}
-                onChange={handleEditInputChange}
-              />
-            </Form.Group>
-            <Form.Group
-              className="mb-3"
-              controlId="formMedicamentStockQuantity"
-            >
-              <Form.Label>Stock Quantity</Form.Label>
-              <Form.Control
-                type="number"
-                placeholder="Stock Quantity"
-                name="StockQuantity"
-                value={medicamentToEdit?.StockQuantity}
-                onChange={handleEditInputChange}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formMedicamentExpiryDate">
-              <Form.Label>Expiration Date</Form.Label>
-              <Form.Control
-                type="date"
-                name="ExpiryDate"
-                value={medicamentToEdit?.ExpiryDate}
-                onChange={handleEditInputChange}
-              />
-            </Form.Group>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleEditModalClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleEditMedicament}>
-            Save
-          </Button>
-        </Modal.Footer>
-      </Modal>
-
-      {/* Modal for ordering a medicament */}
-      <Modal show={showOrderModal} onHide={handleOrderModalClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Order Medicament</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form.Group className="mb-3" controlId="formOrderQuantity">
-            <Form.Label>Order Quantity</Form.Label>
-            <Form.Control
-              type="number"
-              value={orderQuantity}
-              onChange={handleOrderQuantityChange}
-            />
-          </Form.Group>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleOrderModalClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleOrderMedicament}>
-            Order
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      {/* Second Modal: Request Form */}
+      {showRequestModal && (
+        <Modal show={showRequestModal} onHide={handleRequestModalClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Request Details</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            {/* Check if request data exists */}
+            {requestData.length > 0 ? (
+              <div>
+                <h5>Request Information:</h5>
+                <Form>
+                  {requestData.map((medicament) => (
+                    <div key={medicament.medicamentId} className="mb-3">
+                      <Form.Group controlId={`medicament-${medicament.medicamentId}`}>
+                        <Form.Label>Id</Form.Label>
+                        <Form.Control
+                          type="number"
+                          value={medicament.medicamentId}
+                          disabled
+                        />
+                      </Form.Group>
+                      <Form.Group controlId={`medicament-${medicament.medicamentId}-name`}>
+                        <Form.Label>Nom</Form.Label>
+                        <Form.Control
+                          type="text"
+                          value={medicament.medicamentName}
+                          disabled
+                        />
+                      </Form.Group>
+                      <Form.Group controlId={`medicament-${medicament.medicamentId}-quantity`}>
+                        <Form.Label>Quantity to Request</Form.Label>
+                        <Form.Control
+                          type="number"
+                          value={medicament.quantiteDemandee || 0}
+                          onChange={(e) => handleQuantityChange(e, medicament.medicamentId)}
+                          min="0"
+                          placeholder="Enter quantity to request"
+                        />
+                      </Form.Group>
+                    </div>
+                  ))}
+                </Form>
+              </div>
+            ) : (
+              <div>No request data available.</div>
+            )}
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleRequestModalClose}>
+              Close
+            </Button>
+            <Button variant="primary" onClick={handleSubmitRequest}>
+              Submit Request
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      )}
     </div>
   );
-};
+}
 
 export default MedicamentManagement;
