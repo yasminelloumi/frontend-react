@@ -50,7 +50,7 @@ function LoginSection() {
           if (userRole === "pharmacien") {
             navigate("/"); // Redirect to Pharmacien page
           } else if (userRole === "medecin") {
-            navigate("/"); // Redirect to Medecin page
+            navigate("/MedecinMenu"); // Redirect to Medecin page
           } else if (userRole === "fournisseur") {
             navigate("/HomeFournisseur"); // Redirect to Medication Provider page
           } else if (userRole === "admin") {

@@ -34,7 +34,7 @@ function PersonnelManagement() {
               </Card.Text>
               <Button
                 variant="primary"
-                onClick={() => handleNavigation("/GestionMedecin")}
+                onClick={() => handleNavigation("/GestionPharmacien")}
               >
                 Access
               </Button>

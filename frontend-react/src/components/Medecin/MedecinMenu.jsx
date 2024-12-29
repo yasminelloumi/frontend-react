@@ -106,7 +106,7 @@ const MedecinMenu = () => {
             <Card.Text>Send electronic prescriptions.</Card.Text>
             <Button
               variant="warning"
-              onClick={() => handleNavigation("/EnvoyerOrdonnance")}
+              onClick={() => handleNavigation("/OrdonnanceManagement")}
             >
               Access
             </Button>

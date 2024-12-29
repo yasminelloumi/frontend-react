@@ -105,7 +105,7 @@ const MenuProfile = () => {
                   </Card.Text>
                   <Button
                     variant="warning"
-                    onClick={() => handleNavigation("/AjouterOrdonnance")}
+                    onClick={() => handleNavigation("/OrdonnanceManagement")}
                   >
                     Access
                   </Button>
